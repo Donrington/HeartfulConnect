@@ -1,0 +1,481 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Your website description here" />
+    <meta name="keywords" content="your, keywords, here" />
+    <link href="/static/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/static/fontawesome/css/all.css" rel="stylesheet" type="text/css"/>
+    <link rel='stylesheet' href="/static/script/cloudflare.css" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashCss.css') }}">
+    <link rel="canonical" href="https://www.wrappixel.com/templates/materialpro-lite/" />
+    <!-- Favicon icon -->
+ 
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='assets/images/favicon.png') }}">
+    <!-- chartist CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/plugins/chartist-js/dist/chartist.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/plugins/chartist-js/dist/chartist-init.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css') }}">
+    <!--This page css - Morris CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/plugins/c3-master/c3.min.css') }}">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/css/style.min.css') }}">
+    <title>{{pagename}} </title>
+    <style type="text/css">
+
+.footerdiv{
+    position: relative;
+    margin-top: 100px;
+}
+
+.btn-like {
+    background-color: #3498db; /* Button background color */
+    color: #fff; /* Text color */
+}
+
+/* Custom CSS for the "Liked" button */
+.btn-liked {
+    background-color: #e74c3c; /* Button background color when liked */
+    color: #fff; /* Text color when liked */
+}
+
+
+
+         a:hover{
+            color: #BE1922 !important;
+        }
+
+        .mdi:hover{
+            color: #BE1922 !important;
+        }
+    
+        body{
+    margin-top:20px;
+    background:#ebeef0;
+	font-family: Gill Sans,Gill Sans MT,Calibri,sans-serif; 
+}
+
+.img-sm {
+    width: 46px;
+    height: 46px;
+}
+
+.panel {
+    box-shadow: 0 2px 0 rgba(0,0,0,0.075);
+    border-radius: 0;
+    border: 0;
+    margin-bottom: 15px;
+}
+
+.panel .panel-footer, .panel>:last-child {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.panel .panel-heading, .panel>:first-child {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.panel-body {
+    padding: 25px 20px;
+}
+
+
+.media-block .media-left {
+    display: block;
+    float: left
+}
+
+.media-block .media-right {
+    float: right
+}
+
+.media-block .media-body {
+    display: block;
+    overflow: hidden;
+    width: auto
+}
+
+.middle .media-left,
+.middle .media-right,
+.middle .media-body {
+    vertical-align: middle
+}
+
+.thumbnail {
+    border-radius: 0;
+    border-color: #e9e9e9
+}
+
+.tag.tag-sm, .btn-group-sm>.tag {
+    padding: 5px 10px;
+}
+
+.tag:not(.label) {
+    background-color: #fff;
+    padding: 6px 12px;
+    border-radius: 2px;
+    border: 1px solid #cdd6e1;
+    font-size: 12px;
+    line-height: 1.42857;
+    vertical-align: middle;
+    -webkit-transition: all .15s;
+    transition: all .15s;
+}
+.text-muted, a.text-muted:hover, a.text-muted:focus {
+    color: #acacac;
+}
+.text-sm {
+    font-size: 0.9em;
+}
+.text-5x, .text-4x, .text-5x, .text-2x, .text-lg, .text-sm, .text-xs {
+    line-height: 1.25;
+}
+
+.btn-trans {
+    background-color: transparent;
+    border-color: transparent;
+    color: #929292;
+}
+
+.btn-icon {
+    padding-left: 9px;
+    padding-right: 9px;
+}
+
+.btn-sm, .btn-group-sm>.btn, .btn-icon.btn-sm {
+    padding: 5px 10px !important;
+}
+
+.mar-top {
+    margin-top: 15px;
+}
+
+.navnav{
+    position: fixed;
+    margin-top: 0;
+}
+    </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  
+  <nav class="navbar navbar-expand-lg navnav">
+      <div class="container-fluid">
+          <a class="navbar-brand" href="#"></a> 
+          <div class="img-nav">
+            <a class="navbar-brand" href="#"><img src="{{ url_for('static', filename='icon/mainicon.png')}}" class="img-fluid icon"></a>
+        </div>
+        
+        <input type="text" class="search-bar" id="search-input" placeholder="Search..." autofocus>
+        <a href="" id="searchimg">
+            <img src="{{ url_for('static', filename='icon/search.png') }}" width="20px" height="20px">
+        </a>
+            
+            <div id="search-results"></div>
+       
+  <!-- Navbar Toggle Button -->
+
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+              <ul class="navbar-nav ml-auto">
+                  <li class="nav-item active">
+                      <a class="nav-link" href="{{url_for('user.userhomepage')}}"><strong>Home</strong></a>
+                  </li>
+                  
+                  {% if session.get('username')==None%}
+                  <li class="nav-item active">
+                    <a class="nav-link " href="{{url_for('user.logout')}}" class="text-danger"><strong>Logout {{user.username}}</strong></a>
+                  </li>
+                  {%endif%}
+
+                  <!-- <li class="nav-item profile2">
+                    <button type="button" class="btn btn-primary position-relative" id="inboxButton">
+                        Inbox
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                          0
+                          <span class="visually-hidden">unread messages</span>
+                        </span>
+                      </button>
+                  </li> -->
+
+                  <li class="nav-item profile2 p-2">
+                    <a href="#" class="notification" id="inboxButton">
+                        <i class="fa-solid fa-bell fa-lg fa-shake" style="color: #801900;"></i>
+                        <span class="num">0</span>
+                    </a>
+                </li>
+
+
+                  {%if user.user_img  %}
+                  <li class="nav-item profile2">
+                    <img src="/static/images/profile/{{ user.user_img}}" alt="{{ user.username }}" class="profile-image" name="profile_picture">
+                  </li>
+                  
+                 
+                  {%else%}
+                  <li class="nav-item profile2">
+                    <img src="/static/images/profile/default.png" alt="{{ user.username }}" class="profile-image" name="profile_picture">
+                  </li>
+                  
+                  {%endif%}
+
+                 
+              </ul>
+          </div>
+      </div>
+  </nav>
+
+  <div class="preloader">
+    <div class="lds-ripple">
+        <div class="lds-pos"></div>
+        <div class="lds-pos"></div>
+    </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- Main wrapper - style you can find in pages.scss -->
+<!-- ============================================================== -->
+<div id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+    data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
+    <!-- ============================================================== -->
+    <!-- Topbar header - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+   
+
+    <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <button class="sidebar-toggler" id="sidebar-toggler">
+            <i class="mdi mdi-menu"></i>
+        </button>
+        
+        <aside class="left-sidebar navnav col-md-2 col-lg-2 col-sm-12" data-sidebarbg="skin6">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav pt-4 mt-5 sticky-top">
+                    <ul id="sidebarnav" class="flex-column">
+                        <!-- User Profile-->
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="{{ url_for('user.dashboard') }}" aria-expanded="false">
+                                <i class="mdi me-2 mdi-gauge"></i><span class="hide-menu">Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="{{ url_for('user.userprofile') }}" aria-expanded="false">
+                                <i class="mdi me-2 mdi-account-check"></i><span class="hide-menu">Profile</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="{{ url_for('user.userstory') }}" aria-expanded="false">
+                                <i class="mdi me-2 mdi-earth"></i><span class="hide-menu">Story</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="{{ url_for('user.consult') }}" aria-expanded="false">
+                                <i class="mdi me-2 mdi-emoticon"></i><span class="hide-menu">Consultations</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+            <div class="sidebar-footer">
+                <div class="row">
+                    <div class="col-4 link-wrap">
+                        <!-- item-->
+                        <a href="{{ url_for('user.userprofile') }}" class="link" data-toggle="tooltip" title=""
+                            data-original-title="Settings"><i class="ti-settings"></i></a>
+                    </div>
+                    <div class="col-4 link-wrap">
+                        <!-- item-->
+                        <a href="" class="link" data-toggle="tooltip" title="" data-original-title="Email"><i
+                                class="mdi mdi-gmail"></i></a>
+                    </div>
+                    <div class="col-4 link-wrap">
+                        <!-- item-->
+                        <a href="{{ url_for('user.logout') }}" class="link" data-toggle="tooltip" title=""
+                            data-original-title="Logout"><i class="mdi mdi-power"></i></a>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        
+     
+       
+    
+       
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- =================================
+
+
+ Content for the dashboard -->
+ {%block header%}
+        
+ {%endblock header%}         
+
+          {%block content%}
+
+          {%endblock%}
+
+<div class="col-md-12 footerdiv">
+    <footer>
+          <p class="text-secondary text-end pt-3"><i>&copy;Designed By <img src="{{ url_for('static', filename='icon/circle2.png') }}" class="fa-fade mx-auto" id="iconfooter"> CyberSage 2023</i></p>
+    </footer>
+  </div>
+  <script src='/static/script/jquery.js' type='text/javascript'></script>
+  <script src="/static/bootstrap/js/bootstrap.bundle.js"></script>
+ 
+<!-- ============================================================== -->
+<!-- End Page wrapper  -->
+<!-- ============================================================== -->
+</div>
+
+<!-- ============================================================== -->
+<!-- End Wrapper -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- All Jquery -->
+<!-- ============================================================== -->
+<script src="/static/assets/plugins/jquery/dist/jquery.min.js"></script>
+
+<!-- Bootstrap tether Core JavaScript -->
+<script src="/static/assets/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="/static/css/js/app-style-switcher.js"></script>
+<!--Wave Effects -->
+<script src="/static/css/js/waves.js"></script>
+<!--Menu sidebar -->
+<script src="/static/css/js/sidebarmenu.js"></script>
+<!-- ============================================================== -->
+<!-- This page plugins -->
+<!-- ============================================================== -->
+<!-- chartist chart -->
+<script src="/static/assets/plugins/chartist-js/dist/chartist.min.js"></script>
+<script src="/static/assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js"></script>
+<!--c3 JavaScript -->
+<script src="/static/assets/plugins/d3/d3.min.js"></script>
+<script src="/static/assets/plugins/c3-master/c3.min.js"></script>
+<!--Custom JavaScript -->
+<script src="/static/css/js/pages/dashboards/dashboard1.js"></script>
+
+{%block customjs%}
+<script src="/static/css/js/custom.js"></script>
+
+  <script type='text/javascript'>
+
+      $(document).ready(function() {
+          // Sidebar toggle animation
+          $('.sidebar').toggleClass('active');
+          $('.sidebarCollapse').on('click', function() {
+              $('.sidebar').toggleClass('active');
+          });
+
+          // Add your additional jQuery animations and interactions here
+
+          const navbar = document.querySelector('.navbar');
+          const navLinks = document.querySelector('.nav-item');
+
+          window.addEventListener('scroll', () => {
+              if (window.scrollY == 0) {
+                  navbar.classList.remove('blend');
+                  navLinks.classList.remove('blend');
+              } else {
+                  navbar.classList.add('blend');
+                  navLinks.classList.add('blend');
+              }
+          });
+
+
+      
+      });
+
+      
+//       $(document).ready(function(){
+//     const unreadMessageCount = 0;  // Replace with your actual unread message count
+
+//     // Update the badge value on the button
+//     const badgeElement = document.querySelector('.notification .num');
+//     badgeElement.textContent = unreadMessageCount;
+
+//     // Optionally, you can show/hide the badge based on the count
+//     if (unreadMessageCount > 0) {
+//         badgeElement.style.display = 'inline-block';  // Show the badge
+//     } else {
+//         badgeElement.style.display = 'none';   // Hide the badge
+//     }
+// });
+
+  </script>
+
+  
+<script>
+    // Function to update the badge count based on the actual number of unread messages
+    function updateBadgeCount(unreadMessageCount) {
+        const badgeElement = document.querySelector('.notification .num');
+        badgeElement.textContent = unreadMessageCount;
+
+        // Show/hide the badge based on the count
+        badgeElement.style.display = unreadMessageCount > 0 ? 'inline-block' : 'none';
+    }
+
+    // Function to fetch the message count from the server (polling)
+    function fetchMessageCount() {
+        // Replace this URL with your actual endpoint for fetching the message count
+        fetch('/user/story/get-message-count')
+
+            .then(response => response.json())
+            .then(data => {
+                // Update the message count
+                updateBadgeCount(data.count);
+            })
+            .catch(error => {
+                console.error('Error fetching message count:', error);
+            });
+    }
+
+    // Call the update function when the page loads
+    fetchMessageCount();
+
+    // Poll for updates at regular intervals (e.g., every 1 minute)
+    setInterval(fetchMessageCount, 60000);
+</script>
+
+
+<script>
+    document.getElementById('sidebar-toggler').addEventListener('click', function () {
+        document.querySelector('.left-sidebar').classList.toggle('show-sidebar');
+    });
+</script>
+
+
+
+
+   
+
+    
+    {%endblock customjs%}
+</body>
+</html>

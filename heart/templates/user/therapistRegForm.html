@@ -1,0 +1,70 @@
+
+{%extends"user/layout2.html"%}
+
+{%block content%}
+  
+  <div class="row">
+
+    <div class="col-md-12">
+        <div class="container main">
+            <div class="text-center">
+              <img src="../../static/icon/icon1.png" alt="Heartful Connections Icon" class="mb-4 img-fluid icon">
+              <h2><strong>Therapist Registration</strong></h2>
+            </div>
+            <form id="therapistForm">
+              <div class="form-group mt-3 mb-3">
+                <label for="username"><strong>Username:</strong></label>
+                <input type="text" class="form-control border-danger" id="username" placeholder="Enter username" required autofocus>
+              </div>
+              <div class="form-group mt-3">
+                <label for="email"><strong>Email:</strong></label>
+                <input type="email" class="form-control border-danger" id="email" placeholder="Enter email" required>
+              </div>
+              <div class="form-group mt-3">
+                <label for="phone"><strong>Phone Number:</strong></label>
+                <input type="tel" class="form-control border-danger" id="phone" placeholder="Enter phone number" required>
+              </div>
+              <div class="form-group mt-3">
+                <label><strong>Gender:</strong></label><br>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="gender" id="male" value="male" required>
+                  <label class="form-check-label" for="male">Male</label>
+                </div>
+                <div class="form-check form-check-inline mt-3">
+                  <input class="form-check-input" type="radio" name="gender" id="female" value="female" required>
+                  <label class="form-check-label" for="female">Female</label>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="dob"><strong>Date of Birth:</strong></label>
+                <input type="date" class="form-control border-danger" id="dob" required>
+              </div>
+              <div class="form-group mt-3">
+                <label for="password"><strong>Password:</strong></label>
+                <input type="password" class="form-control border-danger" id="password" placeholder="Enter password" required>
+              </div>
+              <div class="form-group mt-3">
+                <label for="confirmPassword"><strong>Confirm Password:</strong></label>
+                <input type="password" class="form-control border-danger" id="confirmPassword" placeholder="Confirm password" required>
+              </div>
+              <div class="form-group mt-3">
+                <label for="specialization"><strong>Specialization:</strong></label>
+                <textarea class="form-control border-danger" id="specialization" rows="3" placeholder="Enter your specialization"></textarea>
+              </div>
+              <div class="form-group mt-3">
+                <label for="file"><strong>Upload Your Resume:</strong></label>
+                <input type="file" class="form-control-file btn btn-outline-danger rounded-pil" id="file">
+              </div>
+              <button type='submit'class="btn btn-outline-danger rounded-pil form-control rounded-pil  mt-3 mb-2" id="sub" disabled>Submit Credentials</button>
+              <div class='col-md-12 pt-2 mt-3  text-center'>
+                <input type="radio" id="radio1"> <span class='text-light pb-4' >By Registering You Agree To Our </span><span class='text-danger pb-4'>Terms & Condition</span>
+                  </div>
+                  <a href='userRegForm.html' class="text-danger text-decoration-none" id="usr">Join As A User</a>
+                </form>
+          </div>
+          </div>
+        </div>
+
+    </div>
+      
+{%endblock%}

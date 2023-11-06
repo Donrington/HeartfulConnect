@@ -1,0 +1,294 @@
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  /* background-image:linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(190, 35, 24, 0.1)),url('../images/t14.jpg'); */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+
+
+.story-container{
+  max-height: 500px; /* Set a fixed maximum height for the chat container */
+  overflow-y: scroll; /* Enable vertical scrolling when content overflows */
+  border: 1px solid #ccc; /* Add a border for visual separation */
+  padding: 10px; 
+}
+
+.message{
+  padding: 5px 10px;
+  background-color: #f2f2f2;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+.con{
+  position: relative;
+  margin-top: -50px !important;
+}
+/* Default light mode */
+:root {
+  --background-color: #ffffff;
+  --text-color: #000000;
+}
+
+/* Dark mode */
+.dark-mode {
+  --background-color: #333333;
+  --text-color: #ffffff;
+}
+
+.img-nav{
+  position: relative;
+  right:50px;
+}
+
+.content-div{
+  border: 1px solid rgba(57, 54, 54, 0.104);
+}
+
+
+.icon{
+    width:400px;
+    
+    }
+    
+    .nav-item {
+        list-style: none;
+        display: flex;
+        }
+        
+        .nav-item li {
+        margin-right: 100px;
+        }
+        
+        .nav-item a {
+        color:#ac9b9c;
+        text-decoration: none;
+        transition: color 0.3s;
+       
+        }
+        
+        .nav-item.blend a {
+            color:#BE1922 !important; 
+          }
+        
+        .nav-item a:hover {
+        color: #BE1922 ;
+        }
+        
+        .navbar {
+           
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 40px;
+            background-color: white;
+            color: #fff;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            transition: background-color 0.5s;
+            z-index: 1000;
+          }
+        
+          .navbar.blend {
+            background-color: rgba(255, 255, 255, 0.9);
+          }
+          .navbar.scrolled {
+            background-color: rgba(0, 0, 0, 0.7); /* Change to your desired background color */
+          }
+        
+          #searchimg{
+            position: relative;
+            right:30px !important;
+          }
+        
+          .search-bar {
+            border: none;
+            border-radius: 20px;
+            padding: 10px 30px;
+            background-color: rgba(255, 255, 255, 0.2);
+            color:  red;
+            transition: background-color 0.5s;
+            margin-left:200px
+          }
+        
+          .search-bar:focus {
+            background-color:rgba(194, 25, 34, 0.1);
+            outline: none;
+          }
+
+            /* Responsive adjustments */
+@media (max-width: 768px) {
+    .nav-links {
+      display: none;
+    }
+  
+    nav {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .btn {
+      margin: 20px auto;
+    }
+  }
+
+  container-fluid {
+    padding-top: 20px;
+  }
+  
+  .navbar .nav-item .profile img {
+    width: 36px;
+    height: 36px;
+    object-fit: cover;
+    border-radius: 50%;}
+
+
+  .sidebar {
+    background-color: #333;
+    padding: 20px;
+    margin-top: 80px;
+    min-height: 100vh;
+    color: #fff;
+    transition: width 0.3s; /* Add transition for smoother animation */
+  }
+
+  .sidebar.collapsed {
+    width: 0;
+    overflow: hidden;
+  }
+  
+  #toggle-sidebar {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1001; /* Ensure the button is above the sidebar */
+}
+  .mid a{
+    text-decoration: none !important;
+    color:whitesmoke;
+    }
+    
+  .profile {
+    text-align: center;
+    margin-bottom: 100px;
+  }
+  
+  .profile img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+  
+  .main-content {
+    padding: 20px;
+    
+  }
+  
+  .card {
+    margin-bottom: 20px;
+    margin-top: 80px;
+    min-height:400px;
+  }
+ nav .profile2 img {
+    width: 36px;
+    height: 36px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-left: 20px;
+
+  }
+  .card-header {
+    background-color: #f8f9fa;
+    font-weight: bold;
+  }
+  .set a{
+    padding-top: 30px !important;
+  }
+
+  .dash a{
+    color:aqua !important;
+    padding-bottom: 30px;
+  }
+  .table {
+    margin-bottom: 0;
+  }
+  
+  .form-control.mb-2 {
+    resize: none;
+  }
+  
+  .btn-outline-danger {
+    width: 100%;
+  }
+  
+ 
+.sidebar-aside {
+  margin-top: 20px;
+}
+
+.card-header {
+  background-color: #292929ff;
+  color:#fff;
+  font-weight: bold;
+}
+
+.card-body {
+  padding: 0; /* Remove default padding */
+}
+
+.list-group {
+  margin: 0; /* Remove default margin */
+  border-radius: 0; /* Remove border radius */
+}
+
+.list-group-item {
+  border: none; /* Remove borders */
+  background-color: transparent; /* Transparent background */
+  padding: 10px 15px;
+  font-size: 14px;
+  color: #333;
+}
+
+.list-group-item:hover {
+  background-color:  #ff6347; /* Hover background color */
+  cursor: pointer;
+}
+
+.table-hover{
+  background-color:  #ff6347;
+}
+
+/* Responsive adjustments */
+@media (max-width: 991px) {
+	.sidebar {
+		min-height: 0;
+	}
+	.sidebar-aside {
+		min-height: 0;
+		margin-top: 20px;
+	}
+}
+
+footer {
+  text-align: center;
+  padding: 3px 0;
+  background-color: white;
+  color:black;
+}
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-right: 20px; /* Adjust as needed to control the spacing from the right */
+  background-color: rgb(30, 2, 2);
+  color:black;
+}
+
+#iconfooter{
+  width:12px;
+  height:12px;
+}

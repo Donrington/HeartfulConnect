@@ -1,0 +1,97 @@
+{%extends 'admin/adminlayout.html'%}
+
+{% block content %}
+
+<div class="page-wrapper">
+
+    <div class="page-breadcrumb">
+      <div class="row align-items-center justify-content-end ml-5">
+        <div class="col-md-6 col-8 align-self-center text-center">
+          <h1 class="page-title mb-0 p-0" style="color: #BE1922;"><strong>View Therapists</strong></h1>
+          <div class="d-flex align-items-center ">
+            <nav aria-label="breadcrumb crumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#" style="color: #BE1922;" class="crumb">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page" style="color: #BE1922;" class="crumb">Dashboard</li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+        <div class="col-md-6 col-4 align-self-end text-end">
+          <h2><strong>Welcome, {{ admin.username }}</strong></h2>
+        </div>
+      </div>
+    </div>
+    
+
+    <div class="container-fluid ">
+ 
+
+        <main>
+         <div class=" col-md-9 ms-sm-auto col-lg-10 px-md-4 justify-content-end">
+         
+             <div class="row">
+                 <div class="col-xl-3 col-md-6">
+                     <div class="card the bg-primary text-white mb-4">
+                         <div class="card-body">Users</div>
+                         <div class="card-footer d-flex align-items-center justify-content-between">
+                             <a class="small text-white stretched-link" href="{{url_for('admin_user')}}">View Details</a>
+                             <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="col-xl-3 col-md-6">
+                     <div class="card the bg-warning text-white mb-4">
+                         <div class="card-body">Therapist</div>
+                         <div class="card-footer d-flex align-items-center justify-content-between">
+                             <a class="small text-white stretched-link" href="{{url_for('admin_thera')}}">View Details</a>
+                             <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                         </div>
+                     </div>
+                 </div>
+               </div>
+               
+            
+         </div>
+        </main>
+
+
+        <div class="card mb-4 col-md-9 ms-sm-auto col-lg-10 px-md-4 justify-content-end">
+            <div class="card-header bg-dark">
+                <h2>Therapist Details</h2>
+            </div>
+            <div class="card-body">
+                <div class="col-md">
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <th>Username</th>
+                                <td>{{ therapist.theraname }}</td>
+                                
+                            </tr>
+                            <tr>
+                                <th>Email</th>
+                                <td>{{ therapist.theraemail }}</td>
+                            </tr>
+                            <tr>
+                                <th>Specialization</th>
+                                <td>{{ therapist.specialization}}</td>
+                            </tr>
+
+                            <tr>
+                                <th>Date Registered</th>
+                                <td>{{ therapist.registration_date2 }}</td>
+                            </tr>
+                            <!-- Add more details specific to therapists -->
+                        </tbody>
+                    </table>
+                    <a href="{{ url_for('admin_dashboard') }}" class="btn btn-primary">Back to Dashboard</a>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        {%endblock%}

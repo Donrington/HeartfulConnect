@@ -1,0 +1,178 @@
+{%extends "user/layout2.html"%}
+
+{%block content%}
+<style>
+
+
+.log{
+  margin-top: 100px;
+  
+}
+  /* Google Fonts */
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
+
+/* Variables */
+:root {
+  --first-color: #BE1922;
+  --input-color: white;
+  --border-color: white;
+
+  --body-font: "Roboto", sans-serif;
+  --normal-font-size: 1rem;
+  --small-font-size: 0.75rem;
+}
+
+/* Base */
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+
+h1 {
+  margin: 0;
+}
+
+/* Login Form */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+
+}
+.log2{
+  border:1px solid white;
+}
+.login-form {
+  width: 360px;
+  padding: 4rem 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px rgba(92, 99, 105, 0.2);
+}
+
+.login-title {
+  font-weight: 400;
+  margin-bottom: 3rem;
+}
+
+.input-group {
+  position: relative;
+  height: 48px;
+  margin-bottom: 1.5rem;
+}
+
+.input-field {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-size: var(--normal-font-size);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  outline: none;
+  padding: 1rem;
+  background: none;
+  z-index: 1;
+  color:white;
+}
+
+.input-label {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  padding: 0 0.25rem;
+  color: var(--input-color);
+  font-size: var(--normal-font-size);
+  transition: 0.3s;
+}
+
+.submit-button {
+  display: block;
+  margin-left: auto;
+  padding: 0.75rem 2rem;
+  outline: none;
+  border: none;;
+  color: #fff;
+  font-size: var(--normal-font-size);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.submit-button:hover {
+  box-shadow: 0 10px 36px rgba(0, 0, 0, 0.15);
+}
+
+/* Move label up on input focus */
+
+.input-field:focus + .input-label,
+.input-field:not(:placeholder-shown).input-field:not(:focus) + .input-label {
+  top: -0.5rem;
+  left: 0.8rem;
+  color: var(--first-color);
+  font-size: var(--small-font-size);
+  font-weight: 500;
+  z-index: 1000;
+}
+
+/* Border color change on input focus */
+.input-field:focus {
+  border: 1.5px solid var(--first-color);
+}
+  
+  </style>
+
+
+<div class="row">
+  <div class="col-md-12" id="userLogin">
+      <div class="container log">
+          <!-- User Login Form -->
+          <div class="login-container">
+              <form action="" method="post" class="login-form log2" novalidate>
+                {%set m = get_flashed_messages(with_categories=True)%}
+                {%if m: %}
+                {%for usr,msg in m%}
+                    {%if usr == 'error'%}
+                        <div class="alert alert-danger"> {{msg}} </div>
+                    {%else%}
+                        <div class="alert alert-success"> {{msg}} </div>
+                    {%endif%}
+                {%endfor%}
+                {%endif%}
+                  <h2 class="mt-2 mb-5 text-center"><strong>Login</strong></h2>
+                  <h4 class="text-danger">User Login</h4>
+                  {{ form.csrf_token }}
+
+                  <div class="input-group">
+                    
+                      {{ form.username(placeholder="Enter Username", class="input-field", required=true) }}
+                  </div>
+
+                  <div class="input-group">
+                     
+                      {{ form.password(placeholder="Enter Password", class="input-field", required=true) }}
+                  </div>
+
+                  {{ form.btnsubmit(class="submit-button form-control btn btn-danger border-danger", value="Sign In") }}
+                  <button type="button" id="toggleUserPassword" class="mt-3 btn btn-sm text-danger">Toggle Password</button>
+
+                  <a href="{{url_for('therapist.theraloggin')}}" class="btn btn-sm text-danger mt-3" id="usr" style="text-decoration: none;">Login as Therapist</a>
+
+                  <div class="mt-3 form-floating">
+                      <p>Don't have an account? <a href="{{url_for('user.User_registration')}}" style="text-decoration: none;">Signup</a></p>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+  
+
+{%endblock%}

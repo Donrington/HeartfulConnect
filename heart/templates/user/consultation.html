@@ -1,0 +1,187 @@
+{%extends 'user/userdashboardlayout.html'%}
+{%block header%}
+<div class="page-wrapper  pt-5">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="page-breadcrumb">
+        <div class="row align-items-center">
+            <div class="col-md-6 col-8 align-self-center">
+                <h3 class="page-title mb-0 p-0" style="color:#BE1922"><strong>Consultation</strong></h3>
+                <div class="d-flex align-items-center">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item" ><a href="{{url_for('user.dashboard')}}" style="color:#BE1922">Dashboard</a></li>
+                            <li class="breadcrumb-item active" aria-current="page" style="color:#BE1922">Consultation</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+{%endblock header%}
+
+
+
+{%block content%}
+
+{%set m = get_flashed_messages(with_categories=True)%}
+{%if m: %}
+{%for cat,msg in m%}
+    {%if cat == 'error'%}
+        <div class="alert alert-danger"> {{msg}} </div>
+    {%else%}
+        <div class="alert alert-success"> {{msg}} </div>
+    {%endif%}
+{%endfor%}
+{%endif%}
+<!-- Display user's consultations -->
+<table class="table align-middle mb-0 bg-white mt-5">
+    <thead>
+        <tr>
+            <th>S/N</th>
+            <th>Therapist</th>
+            <th>Specialization</th>
+            <th>Status</th>
+            <th>Action</th>
+            <th>Feedback</th>
+            <th>Profile</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for therapist in therapists %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>
+                <!-- Display therapist's profile image -->
+                <div class="d-flex align-items-center">
+                    {% if therapist.thera_img %}
+                        <img src="/static/images/profiles/{{ therapist.thera_img }}" alt="{{ therapist.theraname }}" style="width: 45px; height: 45px" class="rounded-circle">
+                    {% else %}
+                        <img src="/static/images/profile/default.png" alt="{{ therapist.theraname }}" style="width: 45px; height: 45px" class="rounded-circle">
+                    {% endif %}
+                    <div class="ms-3">
+                        <p class="fw-bold mb-1">{{ therapist.theraname }}</p>
+                        <p class="text-muted mb-0">{{ therapist.theraemail }}</p>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <p class="fw-normal mb-1">{{ therapist.specialization }}</p>
+                <p class="text-muted mb-0">{{ therapist.specialization_description }}</p>
+            </td>
+            <td>
+                <!-- You can set the status based on your logic -->
+                {# Find the specific consultation for the user with the therapist #}
+                {% set user_specific_consultation = consultations | selectattr("id_therapist", "equalto", therapist.therapist_id) | first %}
+                {% if user_specific_consultation %}
+                    <a href="{{ url_for('therapist.theraprofile') }}" value="{{ user_specific_consultation.booking_time }}"><span class="badge rounded-pill text-bg-success">{{ user_specific_consultation.status }}</span></a>
+                {% else %}
+                <span class="badge rounded-pill text-bg-secondary">None</span></a>
+                {% endif %}
+            </td>
+         
+            <td>
+                <a href="javascript:void(0);" onclick="toggleConsultationForm('{{ therapist.therapist_id }}')" class="btn btn-info">Book Now</a>
+            </td>
+            <td>
+                {% for consultation in consultations %}
+                    {% if consultation.id_therapist == therapist.therapist_id %}
+                        <p>{{ consultation.feedback }}</p>
+                    {% endif %}
+                {% endfor %}
+            </td>
+            <td>
+                <a href="{{ url_for('user.view_therapist_profile', thera_id=therapist.therapist_id) }}" class="btn btn-info">View Profile</a>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="8">
+                <div id="consultationForm_{{ therapist.therapist_id }}" style="display: none;">
+                    <form action="{{ url_for('user.submit_consultation', therapist_id=therapist.therapist_id) }}" method="POST">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+                        <div class="form-group">
+                            <label for="day">Day:</label>
+                            <input type="number" class="form-control" name="day" id="day" placeholder="Day" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="month">Month:</label>
+                            <input type="number" class="form-control" name="month" id="month" placeholder="Month" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="year">Year:</label>
+                            <input type="number" class="form-control" name="year" id="year" placeholder="Year" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="hour">Hour:</label>
+                            <input type="number" class="form-control" name="hour" id="hour" placeholder="Hour" required>
+                            <label for="minute">Minute:</label>
+                            <input type="number" class="form-control" name="minute" id="minute" placeholder="Minute" required>
+                        </div>
+                        
+                        <!-- Include form fields for consultation -->
+                        <label for="message">Consultation Text</label>
+                        <textarea name="message" id="message_{{ therapist.therapist_id }}" class="form-control"></textarea>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+    
+
+
+<script>
+    function toggleConsultationForm(consultationId) {
+        const form = document.getElementById(`consultationForm_${consultationId}`);
+        if (form) {
+            form.style.display = form.style.display === 'none' ? 'block' : 'none';
+        }
+    }
+
+    
+  // Update the URL based on the consult route
+const consultRoute = "{{ url_for('user.consult') }}";
+const submitConsultationRoute = consultRoute + '/submit_consultation';
+
+function submitConsultationForm(therapistId) {
+    const message = document.getElementById(`message_${therapistId}`).value;
+
+    // Check if the message is not empty
+    if (message.trim() === '') {
+        alert('Consultation message cannot be empty.');
+        return;
+    }
+
+    // Get the CSRF token
+    const csrfToken = "{{ csrf_token() }}";
+
+    // Prepare the data to send
+    const dataToSend = {
+        content: message,
+        csrf_token: csrfToken,
+        personnel: therapistId
+    };
+
+    // Make an AJAX call using $.post
+    $.post(submitConsultationRoute + `/${therapistId}`, dataToSend, function(serverRsp) {
+        $('#feedback').append(serverRsp).addClass("alert alert-info");
+        $("#message_" + therapistId).val(""); // Clear the textarea
+    });
+}
+
+
+
+
+</script>
+
+
+
+
+
+  {%endblock%}

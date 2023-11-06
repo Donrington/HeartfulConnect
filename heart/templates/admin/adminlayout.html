@@ -1,0 +1,385 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Your website description here" />
+    <meta name="keywords" content="your, keywords, here" />
+    <link href="/static/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/static/fontawesome/css/all.css" rel="stylesheet" type="text/css"/>
+    <link rel='stylesheet' href="/static/script/cloudflare.css" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashCss.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/signin.css') }}">
+    <link href="/static/css/admindash.css" rel="stylesheet" type="text/css"/>
+    <link rel="canonical" href="https://www.wrappixel.com/templates/materialpro-lite/" />
+    <!-- Favicon icon -->
+ 
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='assets/images/favicon.png') }}">
+    <!-- chartist CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/plugins/chartist-js/dist/chartist.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/plugins/chartist-js/dist/chartist-init.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css') }}">
+    <!--This page css - Morris CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/plugins/c3-master/c3.min.css') }}">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/css/style.min.css') }}">
+    <title>{{pagename}} </title>
+    <style type="text/css">
+
+
+
+
+
+.btn-like {
+    background-color: #3498db; /* Button background color */
+    color: #fff; /* Text color */
+}
+
+/* Custom CSS for the "Liked" button */
+.btn-liked {
+    background-color: #e74c3c; /* Button background color when liked */
+    color: #fff; /* Text color when liked */
+}
+
+.the{
+    max-height: 50px;
+}
+
+
+         a:hover{
+            color: #BE1922 !important;
+        }
+
+        .mdi:hover{
+            color: #BE1922 !important;
+        }
+    
+        body{
+    margin-top:20px;
+    background:#ebeef0;
+	font-family: Gill Sans,Gill Sans MT,Calibri,sans-serif; 
+}
+
+.img-sm {
+    width: 46px;
+    height: 46px;
+}
+
+.panel {
+    box-shadow: 0 2px 0 rgba(0,0,0,0.075);
+    border-radius: 0;
+    border: 0;
+    margin-bottom: 15px;
+}
+
+.panel .panel-footer, .panel>:last-child {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.panel .panel-heading, .panel>:first-child {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.panel-body {
+    padding: 25px 20px;
+}
+
+
+.media-block .media-left {
+    display: block;
+    float: left
+}
+
+.media-block .media-right {
+    float: right
+}
+
+.media-block .media-body {
+    display: block;
+    overflow: hidden;
+    width: auto
+}
+
+.middle .media-left,
+.middle .media-right,
+.middle .media-body {
+    vertical-align: middle
+}
+
+.thumbnail {
+    border-radius: 0;
+    border-color: #e9e9e9
+}
+
+.tag.tag-sm, .btn-group-sm>.tag {
+    padding: 5px 10px;
+}
+
+.tag:not(.label) {
+    background-color: #fff;
+    padding: 6px 12px;
+    border-radius: 2px;
+    border: 1px solid #cdd6e1;
+    font-size: 12px;
+    line-height: 1.42857;
+    vertical-align: middle;
+    -webkit-transition: all .15s;
+    transition: all .15s;
+}
+.text-muted, a.text-muted:hover, a.text-muted:focus {
+    color: #acacac;
+}
+.text-sm {
+    font-size: 0.9em;
+}
+.text-5x, .text-4x, .text-5x, .text-2x, .text-lg, .text-sm, .text-xs {
+    line-height: 1.25;
+}
+
+.btn-trans {
+    background-color: transparent;
+    border-color: transparent;
+    color: #929292;
+}
+
+.btn-icon {
+    padding-left: 9px;
+    padding-right: 9px;
+}
+
+.btn-sm, .btn-group-sm>.btn, .btn-icon.btn-sm {
+    padding: 5px 10px !important;
+}
+
+.mar-top {
+    margin-top: 15px;
+}
+
+.the{
+        max-height: 50px !important;
+      }
+    </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  
+  <nav class="navbar navbar-expand-lg sticky-top">
+      <div class="container-fluid">
+          <a class="navbar-brand" href="#"></a> 
+          <div class="img-nav p-2 ">
+            <a class="navbar-brand" href="#"><img src="{{ url_for('static', filename='icon/mainicon.png')}}" class="img-fluid icon bg-white"></a>
+        </div>
+        
+            <input type="text" class="search-bar" placeholder="Search..." autofocus><a href="" id="searchimg"><img src="{{ url_for('static', filename='icon/search.png') }}" width="20px" height="20px"></a>
+      
+       
+  <!-- Navbar Toggle Button -->
+
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+              <ul class="navbar-nav ml-auto">
+                  <li class="nav-item">
+                      <a class="nav-link" href="{{url_for('user.userhomepage')}}"><strong>Home</strong></a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#about"><strong>About</strong></a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#service"><strong>Services</strong></a>
+                  </li>
+                  <li class="nav-item active">
+                    {% if session.get('Admin') %}
+                        <a class="nav-link" href="{{ url_for('admin_logout') }}"><strong>Logout {{admin.username}}</strong></a>
+                    {% endif %}
+                </li>
+
+                  <!-- <li class="nav-item">
+                      <a href="#" class="notification">
+                          <i class='bx bxs-bell'></i>
+                          <span class="num"></span>
+                      </a>
+                  </li> -->
+                  <li class="nav-item profile2">
+                    {% if session.get('Admin') %}
+                        {% if admin.admin_img %}
+                            <img src="{{ url_for('static', filename='images/profile/' + admin.admin_img) }}" alt="" class="profile-image" name="profile_picture">
+                        {% else %}
+                            <img src="{{ url_for('static', filename='images/profile/default.png') }}" alt="" class="profile-image" name="profile_picture">
+                        {% endif %}
+                    {% endif %}
+                </li>
+              </ul>
+          </div>
+      </div>
+  </nav>
+
+  <div class="row">
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light pt-5 mt-3 sidebar collapse">
+      <div class="position-sticky pt-3 mt-4">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active text-danger" aria-current="page" href="{{url_for('admin_dashboard')}}">
+              <span data-feather="home"></span>
+              Dashboard
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for('admin_user')}}">
+              <span data-feather="users"></span>
+              Users
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for('admin_thera')}}">
+              <span data-feather="users"></span>
+             Therapists
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for('admin_view_stories')}}">
+              <span data-feather="layers"></span>
+              User Story
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for('admin_consultations')}}">
+              <span data-feather="bar-chart-2"></span>
+              Consultation
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for('admin_change_profile_picture')}}">
+              <span data-feather="layers"></span>
+              Change Profile
+            </a>
+          </li>
+        </ul>
+ 
+        
+      </div>
+    </nav>
+    </div>
+
+{%block content%}
+
+<!-- ============================================================== -->
+<!-- Main wrapper - style you can find in pages.scss -->
+
+    <!-- Topbar header - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+   
+
+    <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+      
+       
+        </body>
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- =================================
+
+
+ Content for the dashboard -->
+ {%endblock%}
+
+<div class="col-md-12 footerdiv">
+    <footer>
+          <p class="text-secondary text-end pt-3"><i>&copy;Designed By <img src="{{ url_for('static', filename='icon/circle2.png') }}" class="fa-fade mx-auto" id="iconfooter"> CyberSage 2023</i></p>
+    </footer>
+  </div>
+  <script src='/static/script/jquery.js' type='text/javascript'></script>
+  <script src="/static/bootstrap/js/bootstrap.bundle.js"></script>
+ 
+<!-- ============================================================== -->
+<!-- End Page wrapper  -->
+<!-- ============================================================== -->
+</div>
+
+<!-- ============================================================== -->
+<!-- End Wrapper -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- All Jquery -->
+<!-- ============================================================== -->
+<script src="/static/assets/plugins/jquery/dist/jquery.min.js"></script>
+<script src="/static/css/js/dashboard.js"></script>
+<script src="/static/css/js/dashboard1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+<!-- Bootstrap tether Core JavaScript -->
+<script src="/static/assets/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="/static/css/js/app-style-switcher.js"></script>
+<!--Wave Effects -->
+<script src="/static/css/js/waves.js"></script>
+<!--Menu sidebar -->
+<script src="/static/css/js/sidebarmenu.js"></script>
+<!-- ============================================================== -->
+<!-- This page plugins -->
+<!-- ============================================================== -->
+<!-- chartist chart -->
+<script src="/static/assets/plugins/chartist-js/dist/chartist.min.js"></script>
+<script src="/static/assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js"></script>
+<!--c3 JavaScript -->
+<script src="/static/assets/plugins/d3/d3.min.js"></script>
+<script src="/static/assets/plugins/c3-master/c3.min.js"></script>
+<!--Custom JavaScript -->
+<script src="/static/css/js/pages/dashboards/dashboard1.js"></script>
+
+{%block customjs%}
+<script src="/static/css/js/custom.js"></script>
+
+  <script type='text/javascript'>
+
+      $(document).ready(function() {
+          // Sidebar toggle animation
+          $('.sidebar').toggleClass('active');
+          $('.sidebarCollapse').on('click', function() {
+              $('.sidebar').toggleClass('active');
+          });
+
+          // Add your additional jQuery animations and interactions here
+
+          const navbar = document.querySelector('.navbar');
+          const navLinks = document.querySelector('.nav-item');
+
+          window.addEventListener('scroll', () => {
+              if (window.scrollY == 0) {
+                  navbar.classList.remove('blend');
+                  navLinks.classList.remove('blend');
+              } else {
+                  navbar.classList.add('blend');
+                  navLinks.classList.add('blend');
+              }
+          });
+
+
+      
+      });
+
+    
+      
+  </script>
+   
+
+    
+    {%endblock customjs%}
+</body>
+</html>

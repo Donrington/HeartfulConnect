@@ -1,0 +1,205 @@
+{%extends 'user/userdashboardlayout.html'%}
+{%block content%}
+
+
+
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper  pt-5">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="page-breadcrumb">
+                <div class="row align-items-center">
+                    <div class="col-md-6 col-8 align-self-center">
+                        <h3 class="page-title mb-0 p-0" style="color:#BE1922"><strong>Profile</strong></h3>
+                        <div class="d-flex align-items-center">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item" style="color:#BE1922"><a href="{{url_for('user.dashboard')}}" style="color:#BE1922">Dashboard</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page" style="color:#BE1922">Profile</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-4 align-self-center">
+                        <div class="text-end upgrade-btn">
+                         
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <!-- Row -->
+                {%if session.get('userloggedin')!=None%}
+                {%endif%}
+                <div class="row">
+                    
+                    <!-- Column -->
+                    <div class="col-lg-4 col-xlg-3 col-md-5">
+                        <div class="card">
+                            <div class="card-body profile-card">
+                                <center class="mt-4"> <div class="user-profile">
+                                    <!-- Use the function directly in the 'src' attribute -->
+                                    {%if user.user_img%}
+                                    <img src="/static/images/profile/{{ user.user_img}}" alt="Profile Picture" width="200vh" height="200vh">
+
+                                    {%else%}
+                                    <img src="/static/images/profile/default.png" alt="{{ user.username }}" class="profile-image img-fluid" width="200vh" height="200vh">
+                                    {%endif%}
+                                </div>
+                                    <h4 class="card-title mt-2">{{ user.username }}</h4>
+                                    <a href="{{url_for('user.user_profile')}}" class="card-subtitle btn btn-outline-dark">View Profile</a>
+                                    <div class="row text-center justify-content-center">
+                                        
+                                    </div>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                    <!-- Column -->
+                    <div class="col-lg-8 col-xlg-9 col-md-7">
+                        <div class="card">
+                            <div class="card-body">
+                        {% if user%}
+                       <form action="{{ url_for('user.update_profile') }}" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+    <!-- Add form fields for email, password, phone, and profile picture -->
+                    <div class="form-group">
+
+                     
+                        <label for="email">Change Email:</label>
+                        <input type="email" name="email" id="email" value="{{ user.email }}" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">New Password:</label>
+                        <input type="password" name="password" id="password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number:</label>
+                        <input type="text" name="phone" id="phone" value="{{ user.phone }}" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="bio">Bio:</label>
+                        <textarea name="bio" id="bio" class="form-control">{{ user.bio }}</textarea>
+                    </div>
+                    <div class="form-group">
+                    {% if user and user.user_img %}
+                        <label for="profile-picture">Profile Picture:</label>
+                        <input type="file" name="profile_picture" id="profile-picture" class="form-control-file btn btn-outline-danger rounded-pil">
+                        <img src="/static/images/profile/{{ user.user_img}}" alt="Profile Picture" width="150">
+                    {% else %}
+                        <label for="profile-picture">Profile Picture:</label>
+                        <input type="file" name="profile_picture" id="profile-picture" class="form-control-file btn btn-outline-danger rounded-pil">
+                        <img src="/static/images/profile/default.png" alt="Profile Picture" width="150">
+                    {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-danger text-white">Update Profile</button>
+                    </div>
+                 
+                    </form>
+                    {% endif %}
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                </div>
+                <!-- Row -->
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Right sidebar -->
+                <!-- ============================================================== -->
+                <!-- .right-sidebar -->
+                <!-- ============================================================== -->
+                <!-- End Right sidebar -->
+                <!-- ============================================================== -->
+            </div>
+         
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+   
+
+    {%block customjs%}
+
+    <script src="/static/css/js/custom.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#profile-picture').change(function() {
+                var file = this.files[0];
+                if (file) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        $('#profile-preview').attr('src', e.target.result);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        });
+        </script>
+
+
+<script>
+    // Function to update the badge count based on the actual number of unread messages
+    function updateBadgeCount(unreadMessageCount) {
+        const badgeElement = document.querySelector('.notification .num');
+        badgeElement.textContent = unreadMessageCount;
+
+        // Show/hide the badge based on the count
+        badgeElement.style.display = unreadMessageCount > 0 ? 'inline-block' : 'none';
+    }
+
+    // Function to fetch the message count from the server (polling)
+    function fetchMessageCount() {
+        // Replace this URL with your actual endpoint for fetching the message count
+        fetch('/user/story/get-message-count')
+
+            .then(response => response.json())
+            .then(data => {
+                // Update the message count
+                updateBadgeCount(data.count);
+            })
+            .catch(error => {
+                console.error('Error fetching message count:', error);
+            });
+    }
+
+    // Call the update function when the page loads
+    fetchMessageCount();
+
+    // Poll for updates at regular intervals (e.g., every 1 minute)
+    setInterval(fetchMessageCount, 60000);
+</script>
+
+    {%endblock%}
+
+</body>
+
+</html>
+
+{%endblock%}

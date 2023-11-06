@@ -1,0 +1,70 @@
+{%extends "user/layout2.html"%}
+
+
+
+{%block content%}
+<div class="container main">
+    <div class="text-center">
+        <img src="../../static/icon/icon1.png" alt="Heartful Connections Icon" class="mb-4 img-fluid icon">
+        <h2><strong>Therapist Registration</strong></h2>
+           {{ form.hidden_tag() }}
+            {%if form.username2.errors or form.confirm_pwd2.errors%}
+            <div class="alert alert-danger">
+                <p>{{form.username2.errors}}</p>
+                <p>{{form.confirm_pwd2.errors}}</p>
+            </div>
+            {%endif%}
+    </div>
+    
+    <form action="" method="post" enctype="multipart/form-data" novalidate>
+        {{ form.hidden_tag() }}
+        {{form.csrf_token}}
+        <div class="form-group mt-3 mb-3">
+            <label for="username"><strong>Username:</strong></label>
+            {{ form.username2(class="form-control border-danger", placeholder="Enter username", required="required", autofocus="autofocus") }}
+        </div>
+        <div class="form-group mt-3">
+            <label for="email"><strong>Email:</strong></label>
+            {% if form.email2.errors%}
+                {% for i in form.email2.errors%}
+                <span style="color:red">{{i}}</span>
+                {%endfor%}
+            {%endif%}
+            {{ form.email2(class="form-control border-danger", placeholder="Enter email", required="required") }}
+        </div>
+        <div class="form-group mt-3">
+            <label for="phone"><strong>Phone Number:</strong></label>
+            {{ form.phone2(class="form-control border-danger", placeholder="Enter phone number", required="required") }}
+        </div>
+        <div class="form-group mt-3">
+            <label><strong>Gender:</strong></label><br>
+            {{ form.gender2(id="male", value="male", required="required") }}
+        </div>
+        <div class="form-group">
+            <label for="dob"><strong>Date of Birth:</strong></label>
+            {{ form.dob2(class="form-control border-danger", required="required") }}
+        </div>
+        <div class="form-group mt-3">
+            <label for="pwd2"><strong>Password:</strong></label>
+            {{ form.pwd2(class="form-control border-danger", placeholder="Enter password", required="required") }}
+        </div>
+        <div class="form-group mt-3">
+            <label for="confirm_wd2"><strong>Confirm Password:</strong></label>
+            {{ form.confirm_pwd2(class="form-control border-danger", placeholder="Confirm password", required="required") }}
+        </div>
+        <div class="form-group mt-3">
+            <label for="specialization2"><strong>Specialization:</strong></label>
+            {{ form.specialization2(class="form-select border-danger", placeholder="Select specialization") }}
+        </div>
+        
+       
+        <button type="submit" class="btn btn-outline-danger rounded-pil form-control rounded-pil mt-3 mb-2" id="sub">Submit Credentials</button>
+        <div class="col-md-12 pt-2 mt-3  text-center">
+             <span class="text-light pb-4">By Registering You Agree To Our </span><span class="text-danger pb-4">Terms & Condition</span>
+        </div>
+        <a href='/userreg/' class="text-danger text-decoration-none" id="usr">Register As A User</a>
+    </form>
+</div>
+
+
+{%endblock%}

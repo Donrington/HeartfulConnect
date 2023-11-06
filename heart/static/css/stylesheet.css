@@ -1,0 +1,52 @@
+/* Reset some default styles */
+body, h1, h2, h3, p {
+  margin: 0;
+  padding: 0;
+}
+
+/* Basic styling */
+body {
+  font-family: Arial, sans-serif;
+}
+
+
+
+/* Hero section */
+
+
+/* Navigation */
+nav.fixed-nav {
+  display: flex;
+  justify-content: space-between !important;
+  align-items: center !important;;
+  padding: 20px 50px;
+  background-color:rgba(41, 41, 41, 0.5);
+  color: #fff;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100; /* Ensure the nav stays on top of other content */
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+}
+
+.nav-links li {
+  margin-right: 20px;
+}
+
+.nav-links a {
+  color: #fff;
+  text-decoration: none !important;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: #ff6347;
+}
+
+
+
+

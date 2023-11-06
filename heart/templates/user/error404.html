@@ -1,0 +1,17 @@
+{%extends "user/layout2.html"%}
+
+{%block content%}
+  
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 text-center text">
+            <h2>{{error}}</h2>
+            <h4 class="mt-4 text2"><strong>Ooops<span class="text-danger"><b>!!</b></span>,PAGE NOT FOUND !</strong></h4><img src="/static/icon/cancel.png" class="icon mt-4 fa-shake"><br>
+            <a href="{{url_for('user.userhomepage')}}" style="text-decoration: none;" class="btn mt-4"> Go back to Home page</a>
+        </div>
+    </div>
+</div>
+
+
+
+{%endblock%}

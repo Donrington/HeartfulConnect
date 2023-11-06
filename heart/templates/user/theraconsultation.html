@@ -1,0 +1,126 @@
+{%extends 'user/theradashboardlayout.html'%}
+{%block header%}
+<div class="page-wrapper">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="page-breadcrumb">
+        <div class="row align-items-center">
+            <div class="col-md-6 col-8 align-self-center">
+                <h3 class="page-title mb-0 p-0" style="color:#BE1922"><strong>Consultation</strong></h3>
+                <div class="d-flex align-items-center">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item" ><a href="{{url_for('therapist.theradashboard')}}" style="color:#BE1922">Dashboard</a></li>
+                            <li class="breadcrumb-item active" aria-current="page" style="color:#BE1922">Consultation</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+{%endblock header%}
+
+
+
+{%block content%}
+
+<table class="table table-striped align-middle mb-0 bg-white mt-5 col-md-12 ">
+    <thead>
+        <tr>
+            <th>S/N</th>
+            <th>Client Name</th>
+            <th>Status</th>
+            <th>Message</th>
+            <th>Booking Time</th>
+            <th>Feedback</th>
+            <th>Action</th>
+            <th>Profile</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for consultation in pending_consultations %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>
+                <div class="d-flex align-items-center">
+                    {% if consultation.user_feed and consultation.user_feed.user_img %}
+                        <img src="/static/images/profile/{{ consultation.user_feed.user_img }}" alt="{{ consultation.user_feed.username }}" style="width: 45px; height: 45px" class="rounded-circle">
+                    {% else %}
+                        <img src="/static/images/profile/default.png" alt="{{ consultation.user_feed.username }}" style="width: 45px; height: 45px" class="rounded-circle">
+                    {% endif %}
+                    <div class="ms-3">
+                        <p class="fw-bold mb-1">{{ consultation.user_feed.username }}</p>
+                        <p class="text-muted mb-0">{{ consultation.user_feed.email }}</p>
+                    </div>
+                </div>
+            </td>
+            <td>
+                {% if consultation.status == 'pending' %}
+                <a href="{{ url_for('therapist.theraprofile') }}" value="{{ consultation.booking_time }}"><span class="badge rounded-pill text-bg-warning">{{consultation.status}}</span></a>
+                {% elif consultation.status == 'accepted' %}
+                    <a href="{{ url_for('therapist.theraprofile') }}" value="{{ consultation.booking_time }}"><span class="badge rounded-pill text-bg-success">{{consultation.status}}</span></a>
+                {% elif consultation.status == 'declined' %}
+                <a href="{{ url_for('therapist.theraprofile') }}" value="{{ consultation.booking_time }}"><span class="badge rounded-pill text-bg-danger">{{consultation.status}}</span></a>
+                {% endif %}
+            </td>
+            <td>
+                <p>{{ consultation.consultaion_text }}</p>
+            </td>
+            <td>
+                <p>{{consultation.booking_time}}</p>
+            </td>
+            <td>
+                {% if consultation.status == 'accepted' %}
+                    <textarea name="feedback" id="feedback_{{ consultation.consultation_id }}" class="form-control" rows="2" placeholder="Provide feedback..."></textarea>
+                    <button class="btn btn-primary btn-sm mt-2" onclick="submitFeedback('{{ consultation.consultation_id }}')">Submit Feedback</button>
+                {% else %}
+                    <!-- Display feedback if consultation is approved -->
+                    <p>{{ consultation.feedback }}</p>
+                {% endif %}
+            </td>
+            <td>
+                <a href="{{ url_for('therapist.accept_consultation', consultation_id=consultation.consultation_id) }}" class="btn btn-info">Accept</a>
+            </td>
+            <td>
+                <a href="{{ url_for('therapist.view_user_profile', user_id=consultation.user_feed.userid) }}" class="btn btn-info">View Profile</a>
+            </td>
+        </tr>
+        {% endfor %}
+
+
+  
+    </tbody>
+</table>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+function submitFeedback(consultationId) {
+    const feedback = document.getElementById(`feedback_${consultationId}`).value;
+
+    fetch(`/submit_feedback/${consultationId}`, {
+        method: 'POST',
+        body: JSON.stringify({ feedback }),
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': '{{ csrf_token() }}', // Add your CSRF token
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Feedback submitted successfully.');
+
+            // Clear the textarea for a new text
+            document.getElementById(`feedback_${consultationId}`).value = '';
+
+            // You can update the UI as needed
+        } else {
+            alert('Feedback submission failed. Please try again.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+</script>
+
+  {%endblock%}

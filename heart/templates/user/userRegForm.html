@@ -1,0 +1,60 @@
+
+{%extends "user/layout2.html"%}
+
+{%block content%}
+  
+        <div class="row">
+            <div class="col-md-12">
+      <div class="container main">
+    <div class="text-center">
+        <a href="index.html"><img src="../../static/icon/icon1.png" class="img-fluid icon"></a>
+    </div>
+    <h2 class="text-center mb-4 pb-2"><strong>User Registration</strong></h2>
+    <form>
+      <div class="form-group ">
+        <label for="username" class="pt-3 pb-2"><strong>Username:</strong></label>
+        <input type="text" class="form-control border-danger" id="username" placeholder="Enter username" autofocus>
+      </div>
+      <div class="form-group">
+        <label for="email"  class="pt-3 pb-2"><strong>Email:</strong></label>
+        <input type="email" class="form-control border-danger" id="email" placeholder="Enter email">
+      </div>
+      <div class="form-group">
+        <label for="phone"  class="pt-3 pb-2"><strong>Phone Number:</strong></label>
+        <input type="tel" class="form-control border-danger" id="phone" placeholder="Enter phone number">
+      </div>
+      <div class="form-group">
+        <label  class="pt-3 pb-2"><strong>Gender:</strong></label><br>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="gender" id="male" value="male">
+          <label class="form-check-label" for="male"> Male</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="gender" id="female" value="female">
+          <label class="form-check-label" for="female">Female</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="dob"  class="pt-3 pb-2"><strong>Date of Birth:</strong></label>
+        <input type="date" class="form-control border-danger" id="dob">
+      </div>
+      <div class="form-group">
+        <label for="password"  class="pt-3 pb-2"><strong>Password:</strong></label>
+        <input type="password"  class="form-control border-danger" id="password" placeholder="Enter password">
+      </div>
+      <div class="form-group">
+        <label for="confirmPassword"  class="pt-3 pb-2"><strong>Confirm Password:</strong></label>
+        <input type="password" class="form-control border-danger" id="confirmPassword" placeholder="Confirm password">
+      </div>
+      <button type='button' class="btn btn-outline-danger rounded-pil form-control  mt-3 mb-2" id="sub" disabled>Register</button>
+      <div class='col-md-12 pt-2  text-center'>
+       <input type="radio" id="radio1"> <span class='text-light pb-4' >By Registering You Agree To Our </span><span class='text-danger pb-4'>Terms & Condition</span>
+         </div>
+         <a href="{{url_for('thera_reg')}}"class="text-danger text-decoration-none" id="thera">Join As A Therapist</a>
+    </form>
+  </div>
+</div>
+</div>
+
+
+{%endblock%}

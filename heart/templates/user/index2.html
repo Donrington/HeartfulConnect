@@ -1,0 +1,47 @@
+{%extends 'user/landingpagelayout.html'%}
+{%block content%}
+
+    <style>
+        body{
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../../static/images/t14.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-color: black;
+            color:white;
+        }
+        .bd-placeholder-img {
+          font-size: 1.125rem;
+          text-anchor: middle;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          user-select: none;
+        }
+    
+        @media (min-width: 768px) {
+          .bd-placeholder-img-lg {
+            font-size: 3.5rem;
+          }
+        }
+      </style>
+
+    <div class="container col-xxl-7 px-5 py-5 ">
+        <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+          <div class="col-10 col-sm-8 col-lg-6 animate__animated animate__slideInRight">
+            <img src="../../static/images/t12.jpg" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+          </div>
+          <div class="col-lg-6 p-4 animate__animated animate__slideInLeft">
+            <h1 class="display-5 fw-bold lh-1 mb-3">Welcome! To Heartful Connect</h1>
+            <p class="lead p-0"><strong>Where Hearts Unite</strong><br>
+                Discover a world of connection and support at Heartful Connect. Whether you're seeking companionship or professional guidance, we're here to bring people closer and enrich lives. Join us on a journey of self-discovery and genuine connections. Start today.</p>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+              <a href="{{url_for('user.User_registration')}}" class="btn btn-danger btn-lg px-4 me-md-2">Register</a>
+              <a href="{{url_for('user.userhomepage')}}" class="btn btn-outline-danger btn-lg px-4">Learn More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+   
+    
+{%endblock%}
+

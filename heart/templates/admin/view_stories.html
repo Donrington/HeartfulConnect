@@ -1,0 +1,123 @@
+{%extends 'admin/adminlayout.html'%}
+
+{% block content %}
+
+
+
+<div class="page-wrapper">
+
+    <div class="page-breadcrumb">
+      <div class="row align-items-center justify-content-end ml-5">
+        <div class="col-md-6 col-8 align-self-center text-center">
+          <h1 class="page-title mb-0 p-0" style="color: #BE1922;"><strong>View Story</strong></h1>
+          <div class="d-flex align-items-center ">
+            <nav aria-label="breadcrumb crumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#" style="color: #BE1922;" class="crumb">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page" style="color: #BE1922;" class="crumb">Dashboard</li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+        <div class="col-md-6 col-4 align-self-end text-end">
+          <h2><strong>Welcome, {{ admin.username }}</strong></h2>
+        </div>
+      </div>
+    </div>
+    
+
+    <div class="container-fluid ">
+ 
+
+     
+        <main>
+         <div class=" col-md-9 ms-sm-auto col-lg-10 px-md-4 justify-content-end">
+            {%set m = get_flashed_messages(with_categories=True)%}
+        {%if m: %}
+        {%for cat,msg in m%}
+            {%if cat == 'error'%}
+                <div class="alert alert-danger"> {{msg}} </div>
+            {%else%}
+                <div class="alert alert-success"> {{msg}} </div>
+            {%endif%}
+        {%endfor%}
+        {%endif%}
+             <div class="row">
+                 <div class="col-xl-3 col-md-6">
+                     <div class="card the bg-primary text-white mb-4">
+                         <div class="card-body">Users</div>
+                         <div class="card-footer d-flex align-items-center justify-content-between">
+                             <a class="small text-white stretched-link" href="{{url_for('admin_user')}}">View Details</a>
+                             <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="col-xl-3 col-md-6">
+                     <div class="card the bg-warning text-white mb-4">
+                         <div class="card-body">Therapist</div>
+                         <div class="card-footer d-flex align-items-center justify-content-between">
+                             <a class="small text-white stretched-link" href="{{url_for('admin_thera')}}">View Details</a>
+                             <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                         </div>
+                     </div>
+                 </div>
+               </div>
+               
+            
+         </div>
+        </main>
+
+
+        <div class="container">
+          <div class="row">
+              <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4 justify-content-end">
+                  <div class="card mb-4">
+                      <div class="card-header bg-dark">
+                          <h2>User Stories</h2>
+                      </div>
+                      <div class="card-body">
+                        {% for story in stories %}
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <p>{{ story.content }}</p>
+                            </div>
+                            <div class="card-footer">
+                                <p>Posted by: {{ story.user.username }}</p>
+                                <p>Posted at: {{ story.post_time }}</p>
+                                <a href="{{ url_for('admin_delete_story', story_id=story.post_id) }}" class="btn btn-danger btn-sm">Delete Story</a>
+                                <div>
+                                    <h4>Comments</h4>
+                                    {% for comment in story.response %}
+                                        <div class="media-block">
+                                            <a class="media-left" href="#">
+                                                <!-- Display user's profile picture if available -->
+                                                {% if comment.user and comment.user.user_img %}
+                                                    <img class="img-circle img-sm rounded-pill" alt="Profile Picture" src="/static/images/profile/{{ comment.user.user_img }}">
+                                                {% else %}
+                                                    <img class="img-circle img-sm rounded-pill" alt="Profile Picture" src="/static/images/profile/default.png">
+                                                {% endif %}
+                                            </a>
+                                            <div class="media-body">
+                                                <div class="mar-btm">
+                                                    <a href="#" class="btn-link text-semibold media-heading box-inline">{{ comment.user.username }}</a>
+                                                    <p class="text-muted text-sm"><i class="fa fa-mobile fa-lg"></i> - {{ comment.date_posted.strftime('%H:%M') }}</p>
+                                                </div>
+                                                <div class="">
+                                                    <p>{{ comment.response_text }}</p>
+                                                </div>
+                                                <a href="{{ url_for('admin_delete_comment', comment_id=comment.response_id) }}" class="btn btn-danger btn-sm">Delete Comment</a>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      
+{% endblock %}

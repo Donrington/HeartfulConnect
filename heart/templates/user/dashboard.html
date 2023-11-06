@@ -1,0 +1,70 @@
+{%extends "user/dashboardlayout.html"%}
+{%block content%}
+
+
+  <!-- Sidebar -->
+  <div class="container-fluid sidebar-container">
+    <div class="row">
+        <div class="col-lg-2 sidebar">
+            <!-- Profile Picture and Name -->
+            <div class="profile">
+                <img src="../../static/images/profile1.jpg" alt="Profile Picture" class="img-fluid rounded-circle">
+                <h5 class="mt-2"></h5>
+            </div>
+            <!-- Sidebar Navigation -->
+            <ul class="nav flex-column">
+              <button id="toggle-sidebar" class="btn btn-primary btn-sm">Toggle Sidebar</button>
+                <li class="nav-item mid dash"><a href =''>Dashboard</a></li>
+                <li class="nav-item mid"><a href =''>Profile</a></li><hr>
+                <li class="nav-item mid"><a href =''>Premium Services</a></li><hr>
+                <li class="nav-item mid"><a href =''>Consultations</a></li><hr>
+                <li class="nav-item mid"><a href =''>My Followers</a></li><hr>
+                <li class="nav-item mid"><a href =''>Support</a></li><hr>
+                <li class="nav-item mid"><a href =''>Settings</a></li><hr>
+                <li class="nav-item mid"><a href ='' class="set text-danger">Logout</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-lg-7 main-content">
+            <!-- Chat System -->
+            <div class="card">
+                <div class="card-header">Chat System</div>
+                <table class="table table-striped table-hover">
+                    <tbody>
+                        <!-- Display chat messages using table rows -->
+                        <tr>
+                            <td>Sender 1: Message 1</td>
+                        </tr>
+                        <tr>
+                            <td>Sender 2: Message 2</td>
+                        </tr>
+                        <!-- Add more chat messages here -->
+                    </tbody>
+                </table>
+                <div class="card-footer">
+                    <textarea class="form-control mb-2" rows='5' placeholder="Write your post"></textarea>
+                    <button class="btn btn-outline-danger btny form-control">Post</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Online Users Sidebar -->
+        <div class="col-md-3 sidebar-aside">
+            <!-- Online Users -->
+            <div class="card">
+                <div class="card-header">Online Users</div>
+                <div class="card-body">
+                    <!-- Placeholder for online users list -->
+                    <ul class="list-group">
+                        <li class="list-group-item">User 1</li>
+                        <li class="list-group-item">User 2</li>
+                        <li class="list-group-item">User 3</li>
+                        <!-- Add more user items here -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}

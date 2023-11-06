@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/static/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+
+  <link href="/static/fontawesome/css/all.css" rel="stylesheet" type="text/css"/>
+  <link rel='stylesheet' href="/static/script/cloudflare.css" type="text/css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='/css/newCss.css') }}">
+  <title>
+    {%block title%}
+    Heartful Connect
+    {%endblock%}
+</title>
+</head>
+<style>
+
+</style>
+<body>  
+
+<div class="row">
+    <div class="col-md-12">
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand" href="#"><img src="{{ url_for('static', filename='icon/icon1.png') }}" class="img-fluid icon"></a>
+      <input type="text" class="search-bar" placeholder="Search..."><a href="" id="searchimg"><img src="{{ url_for('static', filename='icon/search2.png') }}" width="20px" height="20px"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{{url_for('user.userhomepage')}}"><strong class="text-danger">Home </strong></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#about"><strong>About</strong></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#service"><strong>Services</strong></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#Testimonies"><strong>Testimonies</strong></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact"><strong>Contact</strong></a>
+          </li>
+          {% if session.get('userlogged')!=None%}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('user.dashboard') }}"><strong>Dashboard</strong></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('user.logout') }}"><strong>Logout {{ user.username}}</strong></a>
+          </li>
+        {% else %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="loginDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <strong>Login</strong>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="loginDropdown">
+              <a class="dropdown-item text-danger" href="{{ url_for('user.login') }}">Login as User</a>
+              <a class="dropdown-item text-danger" href="{{ url_for('therapist.theraloggin') }}">Login as Therapist</a>
+            </div>
+          </li>
+        {% endif %}
+        
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+  </div>
+
+{%block banner%}
+<!-- I removed the banner class -->
+{%endblock%}
+{%if session.get('userloggedin')!=None%}
+{%endif%}
+{% block content %} 
+  <!-- I removed the col-12 content class -->
+{%endblock%}
+<div class="footer-container">
+  <footer>
+    <p class="text-white text-center pt-2">
+      <i>&copy;Designed By <img src="{{ url_for('static', filename='icon/circle2.png') }}" class="fa-fade mx-auto" id="iconfooter"> CyberSage 2023</i>
+    </p>
+  </footer>
+  <div class="social-icons">
+    <a href=""><img src="{{ url_for('static', filename='icon/facebook2.png') }}" class="iconfooter2" alt="Facebook"></a>
+    <a href=""><img src="{{ url_for('static', filename='icon/instagram2.png') }}" class="iconfooter2" alt="Instagram"></a>
+    <a href=""><img src="{{ url_for('static', filename='icon/twitter2.png') }}" class="iconfooter2" alt="Twitter"></a>
+    <a href=""><img src="{{ url_for('static', filename='icon/linkedin3.png') }}" class="iconfooter2" alt="LinkedIn"></a>
+  </div>
+</div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="/static/bootstrap/js/bootstrap.bundle.js"></script>
+  <script src='/static/script/jquery.js' type='text/javascript'></script>
+  {%block customjs%}
+  <script type='text/javascript'>
+
+$(document).ready(function(){
+
+const navbar = document.querySelector('.navbar');
+  const navLinks = document.querySelector('.nav-item');
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY == 0) {
+      navbar.classList.remove('blend');
+      navLinks.classList.remove('blend');
+    } else {
+      navbar.classList.add('blend');
+      navLinks.classList.add('blend');
+    }
+  });
+
+  const slider = document.querySelector('.slider');
+    let currentIndex = 0;
+
+    function slide(direction) {
+      currentIndex += direction;
+      if (currentIndex < 0) {
+        currentIndex = slider.children.length - 1;
+      } else if (currentIndex >= slider.children.length) {
+        currentIndex = 0;
+      }
+      slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+ 
+    setInterval(() => {
+      slide(1);
+    }, 5000);
+  
+  
+  
+    
+
+    $('#sub').click(function(){
+        var themail = $('#eml').val();
+        var thetext = $('#msg').val();
+
+        if (themail == '' && thetext == '' || themail == '' && thetext != '' ){
+          alert('Please fill all Input field')
+          $('#en').html('Enter Your Email*').css('color', 'red');
+          $('#ms').html('Your Message*').css('color', 'red');
+        }else if(themail != '' || thetext != ''){
+          confirm('Do you want to proceed?');
+            $('#frm').submit();
+        }
+      });
+    
+  
+
+  
+
+  
+
+
+});
+ 
+ 
+ 
+ 
+ 
+ </script>
+
+{%endblock%}
+
+</body>
+
+
+
+
+
+  
+
+
+
+</body>
+</html>

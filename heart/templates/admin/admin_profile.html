@@ -1,0 +1,71 @@
+{%extends 'admin/adminlayout.html'%}
+
+{% block content %}
+
+<div class="page-wrapper">
+
+    <div class="page-breadcrumb">
+      <div class="row align-items-center justify-content-end ml-5">
+        <div class="col-md-6 col-8 align-self-center text-center">
+          <h1 class="page-title mb-0 p-0" style="color: #BE1922;"><strong>Change Profile Picture</strong></h1>
+          <div class="d-flex align-items-center ">
+            <nav aria-label="breadcrumb crumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#" style="color: #BE1922;" class="crumb">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page" style="color: #BE1922;" class="crumb">Dashboard</li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+        <div class="col-md-6 col-4 align-self-end text-end">
+          <h2><strong>Welcome, {{ admin.username }}</strong></h2>
+        </div>
+      </div>
+    </div>
+    
+
+    <div class="container-fluid ">
+ 
+
+    
+    <div class=" col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      {%set m = get_flashed_messages(with_categories=True)%}
+      {%if m: %}
+      {%for cat,msg in m%}
+          {%if cat == 'error'%}
+              <div class="alert alert-danger"> {{msg}} </div>
+          {%else%}
+              <div class="alert alert-success"> {{msg}} </div>
+          {%endif%}
+      {%endfor%}
+      {%endif%}
+        <h2>Admin Profile</h2>
+        <div class="row">
+            <div class="col-lg-4 col-xlg-3 col-md-5">
+                <div class="card">
+                    <div class="card-body profile-card">
+                        <center class="mt-4">
+                            <div class="user-profile">
+                                <!-- Display the admin's profile picture if available -->
+                                {% if admin.admin_img %}
+                                    <img src="{{ url_for('static', filename='images/profile/' + admin.admin_img) }}" alt="Profile Picture" class="profile-image img-fluid" width="200vh" height="200vh">
+                                {% else %}
+                                    <img src="{{ url_for('static', filename='images/profile/default.png') }}" alt="Default Picture" class="profile-image img-fluid" width="200vh" height="200vh">
+                                {% endif %}
+                            </div>
+                            <h4 class="card-title mt-2">{{ admin.username }}</h4>
+                            <form action="{{ url_for('admin_change_profile_picture') }}" method="POST" enctype="multipart/form-data">
+                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                <div class="form-group">
+                                    <label for="profile_picture">Change Profile Picture:</label>
+                                    <input type="file" name="profile_picture" id="profile_picture" class="form-control-file btn btn-outline-dark rounded-pil">
+                                </div>
+                                <button type="submit" class="btn btn-outline-dark">Upload</button>
+                            </form>
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

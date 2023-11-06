@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/static/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+  <link href="/static/fontawesome/css/all.css" rel="stylesheet" type="text/css"/>
+  <link rel='stylesheet' href="/static/script/cloudflare.css" type="text/css">
+  <link href="/static/css/newCss.css" rel="stylesheet" type="text/css"/>
+ 
+  <title>
+  {{pagename}}
+</title>
+</head>
+<style>
+
+.main {
+      border: 1px solid white;
+      background-color: rgba(0,0,0,0.3);
+      padding: 30px;
+      margin-top: 130px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+      max-width:700px;
+      margin-left:25px
+    }
+body{
+      color:white;
+      background-image: url('/static/images/t14.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      padding:0px;
+    }
+
+    .footerdiv{
+    padding:0px;
+    margin:5px;
+  }
+
+
+  .icon{
+  width:80px;
+  height:70px;
+  }
+  #searchimg{
+    position: relative;
+    right:30px;
+  }
+  div a:hover {
+color: #BE1922 !important;
+}
+
+.text{
+    padding-top:140px;
+    color:white
+}
+
+.text a{
+    color:white !important;  
+    background-color: #BE1922;
+}
+
+.text2{
+  background-color: white;
+  color:black;
+}
+
+footer{
+    margin-top: 40px;
+    padding:5px 0px;;
+}
+</style>
+<body>  
+
+<div class="row">
+    <div class="col-md-12">
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand" href="{{url_for('user.userhomepage')}}"><img src="../../static/icon/icon1.png" class="img-fluid icon"></a>
+      <input type="text" class="search-bar" placeholder="Search..."><a href="" id="searchimg"><img src="../../static/icon/search2.png" width="20px" height="20px"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{{url_for('user.userhomepage')}}"><strong class="text-danger">Home </strong></a>
+          </li>
+  
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for('user.userhomepage')}}"><strong>About</strong></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for('user.userhomepage')}}"><strong>Services</strong></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for('user.userhomepage')}}"><strong>Contact</strong></a>
+          </li>
+          {% if session.get('userlogged')!=None%}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('user.dashboard') }}"><strong>Dashboard</strong></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('user.logout') }}"><strong>Logout {{ user.username}}</strong></a>
+          </li>
+      
+          {%endif%}
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+  </div>
+  </div>
+{%block banner%}
+<!-- I removed the banner class -->
+{%endblock%}
+
+{% block content %} 
+  <!-- I removed the col-12 content class -->
+{%endblock%}
+
+<div class="col-md-12 footerdiv">
+    <footer>
+          <p class="text-white text-center pt-3"><i>&copy;Designed By <img src="/static/icon/circle2.png" class="fa-fade mx-auto" id="iconfooter"> CyberSage 2023</i></p>
+    </footer>
+  </div>
+
+
+
+ 
+<script src="/static/bootstrap/js/bootstrap.bundle.js"></script>
+  <script src='/static/script/jquery.js' type='text/javascript'></script>
+
+ 
+  <script type='text/javascript'>
+
+$(document).ready(function(){
+
+const navbar = document.querySelector('.navbar');
+  const navLinks = document.querySelector('.nav-item');
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY == 0) {
+      navbar.classList.remove('blend');
+      navLinks.classList.remove('blend');
+    } else {
+      navbar.classList.add('blend');
+      navLinks.classList.add('blend');
+    }
+  });
+
+ 
+  
+  
+   
+
+
+
+    $('#toggleUserPassword').click(function() {
+    const passwordInput = $('#password');
+    if (passwordInput.attr('type') === 'password') {
+      passwordInput.attr('type', 'text');
+    } else {
+      passwordInput.attr('type', 'password');
+    }
+  });
+
+  $('#toggleTherapistPassword').click(function() {
+    const passwordInput = $('#therapistPassword');
+    if (passwordInput.attr('type') === 'password') {
+      passwordInput.attr('type', 'text');
+    } else {
+      passwordInput.attr('type', 'password');
+    }
+  });
+
+
+
+  
+
+});
+ 
+ 
+ 
+ 
+ 
+ </script>
+
+
+
+</body>
+
+
+
+
+
+  
+
+
+
+</body>
+</html>

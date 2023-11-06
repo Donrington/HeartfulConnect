@@ -1,0 +1,112 @@
+{%extends 'admin/adminlayout.html'%}
+
+{% block content %}
+
+<div class="page-wrapper">
+
+    <div class="page-breadcrumb">
+      <div class="row align-items-center justify-content-end ml-5">
+        <div class="col-md-6 col-8 align-self-center text-center">
+          <h1 class="page-title mb-0 p-0" style="color: #BE1922;"><strong>Edit Therapists</strong></h1>
+          <div class="d-flex align-items-center ">
+            <nav aria-label="breadcrumb crumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#" style="color: #BE1922;" class="crumb">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page" style="color: #BE1922;" class="crumb">Dashboard</li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+        <div class="col-md-6 col-4 align-self-end text-end">
+          <h2><strong>Welcome, {{ admin.username }}</strong></h2>
+        </div>
+      </div>
+    </div>
+    
+
+    <div class="container-fluid ">
+        
+        
+
+        <main>
+         <div class=" col-md-9 ms-sm-auto col-lg-10 px-md-4 justify-content-end">
+            {%set m = get_flashed_messages(with_categories=True)%}
+            {%if m: %}
+            {%for cat,msg in m%}
+                {%if cat == 'error'%}
+                    <div class="alert alert-danger"> {{msg}} </div>
+                {%else%}
+                    <div class="alert alert-success"> {{msg}} </div>
+                {%endif%}
+            {%endfor%}
+            {%endif%}
+             <div class="row">
+                 <div class="col-xl-3 col-md-6">
+                     <div class="card the bg-primary text-white mb-4">
+                         <div class="card-body">Users</div>
+                         <div class="card-footer d-flex align-items-center justify-content-between">
+                             <a class="small text-white stretched-link" href="{{url_for('admin_user')}}">View Details</a>
+                             <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="col-xl-3 col-md-6">
+                     <div class="card the bg-warning text-white mb-4">
+                         <div class="card-body">Therapist</div>
+                         <div class="card-footer d-flex align-items-center justify-content-between">
+                             <a class="small text-white stretched-link" href="{{url_for('admin_thera')}}">View Details</a>
+                             <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                         </div>
+                     </div>
+                 </div>
+               </div>
+               
+            
+         </div>
+        </main>
+
+
+        <div class="card mb-4 col-md-9 ms-sm-auto col-lg-10 px-md-4 justify-content-end">
+            <div class="card-header bg-dark">
+                <h2>Edit Therapist Account</h2>
+            </div>
+            <div class="card-body">
+                <div class="col-md">
+                    <form method="post">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <div class="form-group">
+                            <label for="theraname">Therapist Name</label>
+                            <input type="text" name="theraname" id="theraname" class="form-control" value="{{ therapist.theraname }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="theraemail">Email</label>
+                            <input type="email" name="theraemail" id="theraemail" class="form-control" value="{{ therapist.theraemail }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="specialization">Specialization</label>
+                            <select name="specialization" id="specialization" class="form-control" required>
+                                <option value="cognitive_therapy" {% if therapist.specialization == 'cognitive_therapy' %}selected{% endif %}>Cognitive Therapy</option>
+                                <option value="behavioral_therapy" {% if therapist.specialization == 'behavioral_therapy' %}selected{% endif %}>Behavioral Therapy</option>
+                                <option value="mental_health_counselor" {% if therapist.specialization == 'mental_health_counselor' %}selected{% endif %}>Mental Health Counselor</option>
+                                <option value="psychiatrist" {% if therapist.specialization == 'psychiatrist' %}selected{% endif %}>Psychiatrist</option>
+                                <option value="family_therapy" {% if therapist.specialization == 'family_therapy' %}selected{% endif %}>Family Therapy</option>
+                                <option value="emotional_focused_therapy" {% if therapist.specialization == 'emotional_focused_therapy' %}selected{% endif %}>Emotional Focused Therapy</option>
+                                <option value="clinical_therapy" {% if therapist.specialization == 'clinical_therapy' %}selected{% endif %}>Clinical Therapy</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="theraname">Therapist Bio</label>
+                            <input type="text" name="bio" id="bio" class="form-control" value="{{ therapist.bio}}" required>
+                        </div>
+                        <button type="submit" class="btn btn-success">Update Therapist</button>
+                        <a href="{{ url_for('admin_dashboard') }}" class="btn btn-primary">Back to Dashboard</a>
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+        
+
+
+        {%endblock%}

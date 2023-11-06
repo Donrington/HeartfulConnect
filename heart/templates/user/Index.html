@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/static/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+  <link href="/static/fontawesome/css/all.css" rel="stylesheet" type="text/css"/>
+  <link rel='stylesheet' href="/static/script/cloudflare.css" type="text/css">
+  <link href="/static/css/newCss.css" rel="stylesheet" type="text/css"/>
+  <title>Heartful Connections</title>
+</head>
+<style>
+
+</style>
+<body>  
+
+<div class="row">
+    <div class="col-md-12">
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand" href="#"><img src="../../static/icon/icon1.png" class="img-fluid icon"></a>
+      <input type="text" class="search-bar" placeholder="Search..."><a href="" id="searchimg"><img src="../../static/icon/search2.png" width="20px" height="20px"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{{url_for('home')}}"><strong class="text-danger">Home </strong></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for('login')}}l" target="_blank"><strong>Login</strong></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#about"><strong>About</strong></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#service"><strong>Services</strong></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact"><strong>Contact</strong></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+  </div>
+<div class="rowcar">
+    <div class="col-md-12">
+  <section class="about">
+    <div class="about-content">
+       
+      <div class="container-fluid p-0">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="3000">
+          <div class="carousel-inner">
+            <div class="carousel-item active" style="background-image: url('../../static/images/t14.jpg');">
+              <div class="carousel-content">
+                <div class="animate__animated animate__fadeInLeft">
+                <h2>Discover a Safe Space</h2>
+                <h2>Where You Can Share Your Stories</h2>
+                </div>
+                <div class="animated-arrow">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                    <path d="M1 6.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1H1.5a.5.5 0 0 1-.5-.5z"/>
+                  </svg>
+                </div>
+                <div class="d-block btnydiv">
+                  <a href="{{url_for('user_reg')}}" target="_blank" class="btny rounded-pill fa-beat-fade">Get Started</a>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item" style="background-image: url('../../static/images/t13.jpg');">
+              <div class="carousel-content">
+                <h2>Connect with Empathetic Individuals,</h2>
+                <h2> And Receive Rupport from Skilled Therapists.</h2>
+                <div class="animated-arrow">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                    <path d="M1 6.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1H1.5a.5.5 0 0 1-.5-.5z"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <!-- Add more carousel items as needed -->
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        
+          <svg class="arrows">
+            <path class="a1" d="M0 0 L30 32 L60 0"></path>
+            <path class="a2" d="M0 20 L30 52 L60 20"></path>
+            <path class="a3" d="M0 40 L30 72 L60 40"></path>
+            </svg>
+        </div>
+       
+      </div>
+     
+    </div>
+    
+  </div>
+  
+</div>
+  
+  <section class="services">
+    <h5 class="subheader pb-3" id="about"><strong>ABOUT US</strong></h5>
+    <div class="row justify-content-center">
+       <div class="col-md-10 good">
+        <div class="row">
+    
+            <div class="col-md-6 good p-0">
+                <h3 class="pt-4 pb-2 miniheader">Empowering Connections</h3>
+               <div class="pt-5 txt">
+
+                <p class="text-start">
+                  Welcome to Heartful Connections, a compassionate community dedicated to supporting your emotional well-being.
+                     Our platform provides a safe space for individuals to share their stories, connect with like-minded souls, and find solace in the journey towards healing and growth.</p>
+                     <p class="text-start">Our team of skilled therapists and empathetic listeners are here to accompany you on your path to self-discovery and resilience. Whether you're seeking guidance, understanding, 
+                      or simply a place to connect, Heartful Connections is here to nurture your heart and empower your spirit.</p> 
+
+               </div>
+              
+
+               <button class="btn btn-outline-danger rounded-pill p-3 mt-4">Read More
+                <i class="fa-solid fa-arrow-right fa-lg" style="color: #BE1922 ;"></i></button>
+                    </div>
+                    
+                  
+            <div class="col-md-6">
+                    <div class="image-container ">
+                      <img src="../../static/images/t23.jpg" class="img-fluid img2" alt="Image 1">
+                    </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="image-container ">
+                    <img src="../../static/images/t20.jpg" class="img-fluid img2" alt="Image 1">
+                  </div>
+            </div>
+
+            <div class="col-md-6 good p-0">
+                
+                <div class="col-md-12">
+                  <h3 class="pb-3 pt-4 miniheader">Your Wellness Matters</h3>
+                  <div class="pt-4 txt">
+                    <p class="text-start">At Heartful Connections, we believe that emotional well-being is a fundamental part of a fulfilling life.
+                      Our platform is designed to provide you with the tools and support you need to navigate life's challenges, find healing, and cultivate positive connections.</p>
+                   <p class="text-start">Join us on this transformative journey towards self-discovery, growth, and genuine connections that uplift your heart and nurture your soul.</p>
+
+                  </div>
+                  <button class="btn btn-outline-danger rounded-pill p-3 mt-4">Read More
+                        <i class="fa-solid fa-arrow-right fa-lg" style="color: #BE1922 ;"></i></button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+              
+    </div>
+  </div> 
+    
+    
+    <div class="service">       
+     
+      <!-- <p>Our skilled therapists are here to provide you with compassionate guidance on your journey to emotional well-being.</p>-->
+      <h3 class="text-center subheader pt-3 pb-4"><strong>Benefits</strong></h3>
+      <div class="row good justify-content-center">
+      
+          <div class="col-md-10 ">
+                  <div class="row">
+                     <!-- <p>Discover a safe space where you can share your stories, 
+                  connect with empathetic individuals, 
+                  and receive support from skilled therapists</p>-->
+                    <div class="col-md-4 good zoomIn animate__animated animate__slideInLeft animate__delay-3s card cardWay">
+                      <div class="image-container ">
+                        <img src="../../static/images/t21.jpg" alt="Image 1">
+                       
+                      </div>
+                      <h4 class="text-benefit text-center pb-2"><strong>Safe and Supportive Community</strong></h4>
+                      <p class="text-center txt">Heartful Connections provides a secure and empathetic environment,
+                         where individuals can freely share their stories and experiences. </p>
+                      <button class="btn btn-outline-danger rounded-circle  p-3  btnBenefit2">
+                        <i class="fa-solid fa-arrow-right fa-xl" style="color: #BE1922 ;"></i></button>
+                    </div>
+                   
+                    <div class="col-md-4 good zoomIn animate__animated animate__fadeIn animate__delay-3s card cardWay ">
+                      <div class="image-container">
+                        <img src="../../static/images/t9-3.jpg"  alt="Image 2">
+                       
+                      </div>
+                      <h4 class="text-benefit text-center pb-3"><strong>Guidance from Skilled Therapists</strong></h4>
+                      <p class="text-center txt"> Our team of experienced therapists is here to guide you,
+                      through your personal growth and healing process.</p>
+                      <button class="btn btn-outline-danger rounded-circle p-3 btnBenefit">
+                        <i class="fa-solid fa-arrow-right fa-xl" style="color: #BE1922 ;"></i></button>
+                    </div>
+                   
+                    <div class="col-md-4 good zoomIn animate__animated animate__slideInRight animate__delay-3s card cardWay">
+                      <div class="image-container ">
+                        <img src="../../static/images/t18.jpg" alt="Image 3">
+                       
+                      </div>
+                      <h4 class="text-benefit text-center"><strong>Holistic </strong>
+                      <h4 class="text-benefit text-center pb-3"><strong>Wellness Approach</strong></h4>
+                      <p class="text-center txt"> We believe in holistic wellness, focusing on emotional,
+                         mental, and spiritual aspects.</p>
+                       
+                      <button class="btn btn-outline-danger rounded-circle p-3 mt-5 btnBenefit">
+                        <i class="fa-solid fa-arrow-right fa-xl" style="color: #BE1922 ;"></i></button>
+                    </div>
+                  </div>
+
+                  <div class="pt-5 pb-5">
+                  <h5 class="subheader " id="service"><strong>OUR SERVICES</strong></h5>
+                </div>
+                  <div class="row">
+                    <!-- <p>Discover a safe space where you can share your stories, 
+                 connect with empathetic individuals, 
+                 and receive support from skilled therapists</p>-->
+                   <div class="col-md-4 good zoomIn animate__animated animate__slideInLeft animate__delay-3s card">
+                     <div class="image-container">
+                       <img src="../../static/icon/classic2.png" alt="Image 1" class="rounded-circle">
+                      
+                     </div>
+                     <h4 class="text-benefit text-center pb-2"><strong>Classic Package</strong></h4>
+                     <div class="card-body">
+                     <ul class="txt">
+                      <li>Access to 2 professional therapists</li>
+                      <li>24/7 Chat Support</li>
+                      <li>Weekly progress reports</li>
+                      <li>Interactive self-care resources</li>
+                  </ul>
+                     <button class="btn btn-outline-danger rounded-pill p-3  btnBenefit2">
+                      Select Plan <i class="fa-solid fa-arrow-right fa-xl" style="color: #BE1922 ;"></i></button>
+                   </div>
+                  </div>
+                   <div class="col-md-4 good zoomIn animate__animated animate__fadeIn animate__delay-3s card ">
+                     <div class="image-container ">
+                       <img src="../../static/icon/gold4.png"  alt="Image 2" class="rounded-circle">
+                      
+                     </div>
+                     <div class="card-body">
+                     <h4 class="text-benefit text-center pb-3"><strong>Gold Package</strong></h4>
+                     <ul class="txt">
+                      <li>Access to 5 professional therapists</li>
+                      <li>24/7 Chat Support</li>
+                      <li>Weekly progress reports</li>
+                      <li>Personalized action plans</li>
+                      <li>Exclusive online workshops</li>
+                  </ul>
+                     <a href ="{{url_for('comingsoon')}}" class="btn btn-outline-danger rounded-pill p-3 btnBenefit">
+                      Select Plan <i class="fa-solid fa-arrow-right fa-xl" style="color: #BE1922 ;"></i></a>
+                   </div>
+                  </div>
+                   <div class="col-md-4 good zoomIn animate__animated animate__slideInRight animate__delay-3s card">
+                     <div class="image-container ">
+                       <img src="../../static/icon/daimond.png" alt="Image 3" class="rounded-circle">
+                      
+                     </div>
+                     
+                     <h4 class="text-benefit text-center pb-3"><strong>Daimond Package</strong></h4>
+                     <div class="card-body">
+                     <ul class="txt">
+                      <li>Access to 8 professional therapists</li>
+                      <li>24/7 Chat Support</li>
+                      <li>Personalized action plans</li>
+                      <li>Priority booking for consultations</li>
+                      <li>Monthly check-ins with senior therapists</li>
+                    </ul>
+                    
+                     <button class="btn btn-outline-danger rounded-pill p-3 btnBenefit">
+                      Select Plan <i class="fa-solid fa-arrow-right fa-xl" style="color: #BE1922 ;"></i></button>
+                   </div>
+                   </div>
+                 </div>
+          </div>
+      </div> 
+      </div>
+    </div>
+    <div class="service">
+      <!-- <h3>Community Connection</h3>
+      <p>Connect with individuals who share similar experiences and find comfort in a supportive and understanding community.</p>-->
+      <div class="container-fluid bg-light">
+        <div class="row align-items-center">
+          <div class="col-md-6 animate__animated animate__slideInLeft animate__delay-4s">
+            <div class="position-relative">
+              <video controls poster="../../static/icon/icon5.png" class="w-100">
+                <source src="../../static/videos/community.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <div class="play-button">
+                <i class="fa-solid fa-play fa-beat-fade fa-2xl" style="color:white;"></i> 
+                
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 animate__animated animate__slideInRight animate__delay-4s">
+            <h5 class="subheader text-start px-2"><strong>COMMUNITY CONNECTIONS</strong></h5>
+            <div class="px-2 py-2">
+              <h2><strong >Discover Heartful Connections</strong></h2>
+              <p class="pt-2">Explore our compassionate community that supports emotional well-being and personal growth,
+                Connect with individuals who share similar experiences and find comfort in a supportive and understanding community.</p>
+                <button class="btn btn-outline-danger rounded-pill p-3 mt-4 ">Our Community
+                  <i class="fa-solid fa-arrow-right fa-lg" style="color: #BE1922 ;"></i></button>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    <div class="service ">
+      <h3 class="text-center subheader"><strong>TESTIMONIES</strong></h3>
+      <!-- <p>Unlock your potential for personal growth and healing as you embark on a path to self-discovery and resilience.</p> -->
+      <div class="container mt-5 animate__animated animate__fadeIn animate__delay-4s">
+        <div class="slider-container">
+          <div class="slider">
+            <div class="testimonial">
+              <p class="text-center"><i class="fa-solid fa-quote-left fa-fade fa-2xl" style="color: #be1922;"></i></p>
+             <h5 class="text-center"><strong>Adedoyin</strong></h5>
+              <p>"Heartful Connections has been my sanctuary for healing. 
+                Connecting with others who share their stories has shown me I'm not alone. 
+                The therapists' guidance has been invaluable. I've grown stronger, more resilient, and optimistic about life."</p>
+            </div>
+            <div class="testimonial">
+              <p class="text-center"><i class="fa-solid fa-quote-left fa-fade fa-2xl" style="color: #be1922;"></i></p>
+              <h5 class="text-center"><strong>Alex</strong></h5>
+              <p>"Heartful Connections introduced me to a supportive community. 
+                Sharing my journey helped me release pain I'd been holding onto. 
+                  The interactions with empathetic souls and therapists have opened doors to self-discovery and empowerment."</p>
+            </div>
+            <div class="testimonial">
+              <p class="text-center"><i class="fa-solid fa-quote-left fa-fade fa-2xl" style="color: #be1922;"></i></p>
+              <h5 class="text-center"><strong>Olivia</strong></h5>
+              <p>"Joining Heartful Connections was a turning point. 
+                I was hesitant at first, but the warmth I received overwhelmed me. 
+                Engaging with therapists'insights has helped me address my fears and regain my confidence. 
+                It's a journey of growth I'll forever cherish."</p>
+            </div>
+            <div class="testimonial">
+              <p class="text-center"><i class="fa-solid fa-quote-left fa-fade fa-2xl" style="color: #be1922;"></i></p>
+              <h5 class="text-center"><strong>Liam</strong></h5>
+              <p>"Heartful Connections came into my life when I needed it most. 
+                 Sharing my struggles with others created connections that touched my heart.
+                 The platform's resources and caring therapists have led me towards a path of healing and newfound hope."</p>
+            </div>
+            <div class="testimonial">
+              <p class="text-center"><i class="fa-solid fa-quote-left fa-fade fa-2xl" style="color: #be1922;"></i></p>
+              <h5 class="text-center"><strong>Maya</strong></h5>
+              <p>"Heartful Connections taught me the power of vulnerability.
+                 Sharing my stories allowed me to let go of the past.
+                 With the guidance of therapists and the compassion of the community, 
+                 I've evolved into a stronger, more resilient version of myself."</p>
+            </div>
+            <div class="testimonial">
+              <p class="text-center"><i class="fa-solid fa-quote-left fa-fade fa-2xl" style="color: #be1922;"></i></p>
+              <h5 class="text-center"><strong>Ibrahim</strong></h5>
+              <p>"I was skeptical about online platforms, but Heartful Connections proved me wrong. 
+                The impact of connecting with others on a similar journey is immeasurable.
+                 The therapists' expertise has provided me tools for managing my emotions and living with purpose."</p>
+            </div>
+          </div>
+        </div>
+        <div class="text-center mt-3">
+          <button class="btn btn-outline-danger mr-2 rounded-circle " onclick="slide(-1)"><i class="fa-solid fa-arrow-left fa-sm" style="color: #BE1922 ;"></i></button>
+          <button class="btn btn-outline-danger rounded-circle " onclick="slide(1)"><i class="fa-solid fa-arrow-right fa-sm" style="color: #BE1922 ;"></i></button>
+        </div>
+      </div>
+    </div>
+    
+  <div class="container-fluid consult">
+    <div class="row consult-content">
+      <div class="col-md-6 consult-text">
+        <h5>Our Special Offers</h5>
+        <p>For Special Consultation</p>
+      </div>
+      <div class="col-md-6 consult-button">
+        <button class="btn btn-outline-danger rounded-pil p-3 btnBenefit">Book An Appointment
+          <i class="fa-solid fa-arrow-right fa-xl" style="color: #BE1922;"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+<div class="row">
+    <div class="col-md-12">
+  <section class="contact" id="contact">
+    <h5 class="subheader text-center px-2"><strong>JOIN US</strong></h5>
+    
+    <div class="container mt-5">
+      <div class="row">
+        <!-- First Section: Office Address, Phone No, and Email -->
+        <div class="col-md-6 animate__animated animate__fadeIn animate__delay-5s">
+          <h3 class="pb-5 pt-2 miniheader"><strong>Contact Information</strong></h3>
+          <p class="pt-2 pb-2"><strong>Office Address:</strong><i> 123 Heartful Street, Cityville</i></p>
+          <p class="pt-2 pb-2"><strong>Phone No:</strong><i> +1 (123) 456-7890</i></p>
+          <p class="pt-2 pb-2"><strong>Email:</strong><i>heartfulconnect@gmail.com</i> </p>
+        </div>
+        <!-- Second Section: Map Embed -->
+        
+        <div class="col-md-6">
+          <h3 class="pt-3 pb-3 miniheader"><strong>Stay Updated</strong></h3>
+          <form id="frm" class="animate__animated animate__fadeIn animate__delay-5s">
+            <div class="form-group">
+              <label for="eml" class="pt-2 pb-2"><strong id='en'>Enter Your Email:</strong></label>
+              <input type="email" class="form-control border-danger" id="eml" placeholder="Your Email" />
+            </div>
+            <div class="form-group">
+              <label for="msg"  class="pt-2 pb-2"><strong id="ms">Your Message:</strong></label>
+              <textarea class="form-control border-danger" id="msg " rows="4" placeholder="Your Message" ></textarea>
+            </div>
+            <button type='button'class="btn btn-outline-danger rounded-pil p-3 btnBenefit form-control" id="sub">Subscribe</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  
+  
+  </section>
+</div>
+<div class>
+  <footer>
+    	<p class="text-white text-center"><i>&copy;Designed By <img src="../../static/icon/circle2.png" class="fa-fade mx-auto " id="iconfooter"> CyberSage 2023</i></p>
+  </footer>
+</div>
+</div>
+ 
+<script src="/static/bootstrap/js/bootstrap.bundle.js"></script>
+  <script src='/static/script/jquery.js' type='text/javascript'></script>
+  <script type='text/javascript'>
+
+$(document).ready(function(){
+
+const navbar = document.querySelector('.navbar');
+  const navLinks = document.querySelector('.nav-item');
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY == 0) {
+      navbar.classList.remove('blend');
+      navLinks.classList.remove('blend');
+    } else {
+      navbar.classList.add('blend');
+      navLinks.classList.add('blend');
+    }
+  });
+
+  const slider = document.querySelector('.slider');
+    let currentIndex = 0;
+
+    function slide(direction) {
+      currentIndex += direction;
+      if (currentIndex < 0) {
+        currentIndex = slider.children.length - 1;
+      } else if (currentIndex >= slider.children.length) {
+        currentIndex = 0;
+      }
+      slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+ 
+    setInterval(() => {
+      slide(1);
+    }, 5000);
+  
+  
+  
+    
+
+    $('#sub').click(function(){
+        var themail = $('#eml').val();
+        var thetext = $('#msg').val();
+
+        if (themail == '' && thetext == '' || themail == '' && thetext != '' ){
+          alert('Please fill all Input field')
+          $('#en').html('Enter Your Email*').css('color', 'red');
+          $('#ms').html('Your Message*').css('color', 'red');
+        }else if(themail != '' || thetext != ''){
+          confirm('Do you want to proceed?');
+            $('#frm').submit();
+        }
+      });
+    
+  
+
+  
+
+  
+
+
+});
+ 
+ 
+ 
+ 
+ 
+ </script>
+
+
+
+</body>
+
+
+
+
+
+  
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,93 @@
+@app.route('/therareg/', methods=['GET', 'POST'])
+@csrf.exempt
+def therapist_registration():
+    form = RegistrationForm()
+    if request.method == 'GET':
+        return render_template('user/therapistRegForm2.html',pagename="Registration Page",form=form)
+    
+    else:
+        if form.validate_on_submit():
+            Theraname = request.form.get("Username")
+            with open(f"Registerationfeedback.txt", 'a') as file:
+                file.write(f"Thank You {Theraname}, for Contacting Us")
+
+            flash(f'Therapist registration successful, {Theraname}')
+            return redirect('/home/page/')
+        else:
+            return render_template('user/therapistRegForm2.html',pagename="Registration Page", form=form)
+
+
+{%extends "user/layout2.html"%}
+
+
+
+{%block content%}
+<div class="container main">
+    <div class="text-center">
+        <img src="../../static/icon/icon1.png" alt="Heartful Connections Icon" class="mb-4 img-fluid icon">
+        <h2><strong>Therapist Registration</strong></h2>
+            {%if form.username.errors or form.confirm_password.errors%}
+            <div class="alert alert-danger">
+                <p>{{form.username.errors}}</p>
+                <p>{{form.confirm_password.errors}}</p>
+            </div>
+            {%endif%}
+    </div>
+    
+    <form method="POST" enctype="multipart/form-data" novalidate>
+        {{ form.hidden_tag() }}
+        <div class="form-group mt-3 mb-3">
+            <label for="username"><strong>Username:</strong></label>
+            {{ form.username(class="form-control border-danger", placeholder="Enter username", required="required", autofocus="autofocus") }}
+        </div>
+        <div class="form-group mt-3">
+            <label for="email"><strong>Email:</strong></label>
+            {% if form.email.errors%}
+                {% for i in form.email.errors%}
+                <span style="color:red">{{i}}</span>
+                {%endfor%}
+            {%endif%}
+            {{ form.email(class="form-control border-danger", placeholder="Enter email", required="required") }}
+        </div>
+        <div class="form-group mt-3">
+            <label for="phone"><strong>Phone Number:</strong></label>
+            {{ form.phone(class="form-control border-danger", placeholder="Enter phone number", required="required") }}
+        </div>
+        <div class="form-group mt-3">
+            <label><strong>Gender:</strong></label><br>
+            {{ form.gender(id="male", value="male", required="required") }}
+        </div>
+        <div class="form-group">
+            <label for="dob"><strong>Date of Birth:</strong></label>
+            {{ form.dob(class="form-control border-danger", required="required") }}
+        </div>
+        <div class="form-group mt-3">
+            <label for="password"><strong>Password:</strong></label>
+            {{ form.password(class="form-control border-danger", placeholder="Enter password", required="required") }}
+        </div>
+        <div class="form-group mt-3">
+            <label for="confirmPassword"><strong>Confirm Password:</strong></label>
+            {{ form.confirm_password(class="form-control border-danger", placeholder="Confirm password", required="required") }}
+        </div>
+        <div class="form-group mt-3">
+            <label for="specialization"><strong>Specialization:</strong></label>
+            {{ form.specialization(class="form-control border-danger", rows="3", placeholder="Enter your specialization") }}
+        </div>
+        <div class="form-group mt-3">
+            <label for="file"><strong>Upload Your Resume:</strong></label>
+            {{ form.resume(class="form-control-file btn btn-outline-danger rounded-pil", id="file") }}
+        </div>
+        {{form.csrf_token}}
+        <button type="submit" class="btn btn-outline-danger rounded-pil form-control rounded-pil mt-3 mb-2" id="sub" {% if form.errors %}disabled{% endif %}>Submit Credentials</button>
+        <div class="col-md-12 pt-2 mt-3  text-center">
+            <input type="radio" id="radio1"> <span class="text-light pb-4">By Registering You Agree To Our </span><span class="text-danger pb-4">Terms & Condition</span>
+        </div>
+        <a href='/userreg/' class="text-danger text-decoration-none" id="usr">Register As A User</a>
+    </form>
+</div>
+
+
+{%endblock%}
+
+
+check this python code properly and state the errors within it and also correct the errors that are not making it submit or making the submit button redirect to the file needed

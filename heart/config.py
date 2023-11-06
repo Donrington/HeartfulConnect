@@ -1,0 +1,6 @@
+SECRET_KEY = "THTD673&?/YHG/@H393_YEU"
+ADMIN_EMAIL="admin@personal.com"
+USER_PROFILE_PATH="heart/static/images/profile/"
+THERA_PROFILE_PATH="heart/static/images/profiles/"
+ADMIN_PROFILE_PATH="heart/static/images/profile/"
+SQLALCHEMY_DATABASE_URI="mysql+mysqlconnector://root@127.0.0.1/heartful_connect"

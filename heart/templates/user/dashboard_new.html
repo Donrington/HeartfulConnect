@@ -1,0 +1,347 @@
+{%extends "user/userdashboardlayout.html"%}
+
+{%block content%}
+
+<style>
+    body div{ 
+ font-family: Gill Sans,Gill Sans MT,Calibri,sans-serif !important; 
+   
+ }
+
+
+
+ </style>
+
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper pt-5">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+         
+            <div class="page-breadcrumb ">
+                <div class="row align-items-center">
+                    <div class="col-md-6 col-8 align-self-center">
+                        <h3 class="page-title mb-0 p-0"  style="color: #BE1922;">Dashboard</h3>
+                        <div class="d-flex align-items-center">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#" style="color: #BE1922;">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page" style="color: #BE1922;">Dashboard</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-4 align-self-end">
+                        <h2 >Welcome! {{user.username}} </h2>
+                    </div>
+                </div>
+            </div>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+              <ul class="flash-messages">
+                {% for message in messages %}
+                  <li>{{ message }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          {% endwith %}
+   
+          
+          
+          
+          
+          
+          
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid con ">
+                <div class="row bg-img">
+                    <!-- Column -->
+                    <div class="col-lg-4 col-xlg-3 ">
+                        <!-- Column -->
+                     
+                        <!-- Column -->
+                        <div class="card ">
+                            <div class="card-body" style="background-color: #BE1922;">
+                                <h4 class="text-white card-title">My Contacts</h4>
+                                <h6 class="card-subtitle text-white mb-0 op-5">Checkout my contacts here</h6>
+                            </div>
+                            <div class="card-body ">
+                                <div class="message-box contact-box ">
+                                    <h2 class="add-ct-btn"><button type="button"
+                                            class="btn btn-circle btn-lg btn-danger waves-effect waves-dark">+</button>
+                                    </h2>
+                                    
+                                    <div class="message-widget contact-widget message story-container">
+                                        <!-- Message -->
+                                        
+                                        {% for other_user in other_users %}
+                                        {%if other_user and other_user.user_img%}
+                                        <!-- Message -->
+                                        <a href="" class="d-flex align-items-center">
+                                            <div class="user-img mb-0"> 
+                                                <img src=" /static/images/profile/{{ other_user.user_img }}" alt="{{ other_user.username }}" class="img-circle">
+                                                <span class="profile-status online pull-right"></span>
+                                              
+                                            </div>
+                                        {%else%}
+                                        <a href="" class="d-flex align-items-center">
+                                            <div class="user-img mb-0"> 
+                                                <img src="/static/images/profile/default.png" alt="{{ other_user.username }}" class="img-circle">
+                                                <span class="profile-status online pull-right"></span>
+                                        
+                                            </div>
+                                            {%endif%}
+                                            <div class="mail-contnet">
+                                                <h5 class="mb-0">{{ other_user.username }}</h5> 
+                                                <span class="mail-desc">{{ other_user.email }}</span>
+                                            </div>
+                                        </a>
+                                        
+                                        {% endfor %}
+                                    
+                                        </a>
+                                      
+                                        <!-- Message -->
+                                      
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-xlg-9">
+                        <div class="card">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs profile-tab" role="tablist">
+                                <li class="nav-item"> <a class="nav-link active" data-bs-toggle="tab" href="#home"
+                                        role="tab">Activity</a>
+                                </li>
+                                <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#profile"
+                                        role="tab">Profile</a> </li>
+                                <li class="nav-item"> <a class="nav-link" data-bs-toggle="tab" href="#settings"
+                                        role="tab">Profile Details</a>
+                                </li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content story-container" >
+                                <div class="tab-pane active" id="home" role="tabpanel">
+                                    <div class="card-body">
+                                        <div class="profiletimeline border-start-0">
+                                            <div class="con sl-item">
+                                                <a href="{{url_for('user.userstory')}}" class="btn btn-outline-dark text-dark form-control">Click to View Story</a>
+                                               {# <!-- <div class="sl-left"> <img src="../../static/assets/images/users/1.jpg" alt="user"
+                                                        class="img-circle"> </div> -->
+                                                <!-- <div class="sl-right">
+                                                    <div><a href="#" class="link">Depp</a> <span class="sl-date">5
+                                                            minutes ago</span>
+                                                        <p>assign a new task <a href="#"  style="color: #BE1922;"> Design weblayout</a></p>
+                                                        <div class="row">
+                                                            <div class="col-lg-3 col-md-6 mb-3"><img
+                                                                    src="../../static/assets/images/big/img1.jpg" alt="user"
+                                                                    class="img-responsive radius w-100"></div>
+                                                            <div class="col-lg-3 col-md-6 mb-3"><img
+                                                                    src="../../static/assets/images/big/img2.jpg" alt="user"
+                                                                    class="img-responsive radius w-100"></div>
+                                                            <div class="col-lg-3 col-md-6 mb-3"><img
+                                                                    src="../../static/assets/images/big/img3.jpg" alt="user"
+                                                                    class="img-responsive radius w-100"></div>
+                                                            <div class="col-lg-3 col-md-6 mb-3"><img
+                                                                    src="../../static/assets/images/big/img4.jpg" alt="user"
+                                                                    class="img-responsive radius w-100"></div>
+                                                        </div>
+                                                        <div class="like-comm"> <a href="javascript:void(0)"
+                                                                class="link me-2">2
+                                                                comment</a> <a href="javascript:void(0)"
+                                                                class="link me-2"><i
+                                                                    class="fa fa-heart text-danger"></i> 5 Love</a>
+                                                        </div>
+                                                    </div>
+                                                </div> -->#}
+                                            </div>
+                                            <hr>{% for story in stories %}
+                                            <div class="sl-item message">
+                                                <div class="sl-left">
+                                                    {% if story.user and story.user.user_img %}
+                                                        <img src="/static/images/profile/{{ story.user.user_img }}" alt="{{ story.user.username }}" class="img-circle">
+                                                    {% else %}
+                                                        <img src="/static/images/profile/default.png" alt="{{ story.user.username }}" class="img-circle">
+                                                    {% endif %}
+                                                </div>
+                                             
+                                                <div class="sl-right">
+                                                    <div>
+                                                        <a href="#" class="link">{{ story.user.username }}</a>
+                                                        <span class="sl-date">{{ story.post_time.strftime('%I:%M %p') }}</span>
+                                                        <div class="mt-3 row">
+                                                            <div class="col-md-3 col-xs-12">
+                                                                {% if story.user and story.user.user_img %}
+                                                                    <img src="/static/images/profile/{{ story.user.user_img }}" alt="{{ story.user.username }}" class="img-responsive w-100 radius">
+                                                                {% else %}
+                                                                    <img src="/static/images/profile/default.png" alt="{{ story.user.username }}" class="img-responsive w-100 radius">
+                                                                {% endif %}
+                                                            </div>
+                                                            <div class="sl-right">
+                                                                {% if story.user and story.user.user_img %}
+                                                                <span>{{story.content}}</span>
+                                                                {% endif %}
+                                                            </div>
+                                                            <div class="pad-ver">
+                                                                <div class="btn-group">
+                                                                    <form method="POST" class="like-form" action="{{ url_for('user.like_post', story_id=story.post_id) }}">
+                                                                        <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+                                                                        <button class="btn btn-sm btn-default btn-hover-success like-btn text-dark"
+                                                                                data-post-id="{{ story.post_id }}"
+                                                                                data-liked="{{ story.has_liked }}">Like</button>
+                                                                        <button class="btn btn-sm btn-default btn-hover-success unlike-btn text-dark"
+                                                                                style="display: none;"
+                                                                                data-post-id="{{ story.post_id }}"
+                                                                                data-liked="{{ story.has_liked }}">Liked</button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                  
+                                                    <!-- Display comments for the story -->
+                                                    <div class="comments">
+                                                        {% for response in story.response %}
+                                                            <div class="media-block">
+                                                                <a class="media-left" href="#">
+                                                                    <!-- Display user's profile picture if available -->
+                                                                    {% if response.user and response.user.user_img %}
+                                                                        <img class="img-circle img-sm rounded-pill" alt="Profile Picture" src="/static/images/profile/{{ response.user.user_img }}">
+                                                                    {% else %}
+                                                                        <img class="img-circle img-sm rounded-pill" alt="Profile Picture" src="/static/images/profile/default.png">
+                                                                    {% endif %}
+                                                                </a>
+                                                                <div class="media-body">
+                                                                    <div class="mar-btm">
+                                                                        <a href="#" class="btn-link text-semibold media-heading box-inline">{{ response.user.username }}</a>
+                                                                        <p class="text-muted text-sm"><i class="fa fa-mobile fa-lg"></i> - {{ response.date_posted.strftime('%H:%M') }}</p>
+                                                                    </div>
+                                                                    <div class="">
+                                                                        <p>{{ response.response_text }}</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+                                            
+                                           
+
+{#
+                                            <div class="sl-item">
+                                                <div class="sl-left"> <img src="../../static/assets/images/users/3.jpg" alt="user"
+                                                        class="img-circle"> </div>
+                                                <div class="sl-right">
+                                                    <div><a href="#" class="link">Mary</a> <span class="sl-date">5
+                                                            minutes ago</span>
+                                                        <p class="mt-2"> Lorem ipsum dolor sit amet, consectetur
+                                                            adipiscing elit. Integer nec odio. Praesent libero. Sed
+                                                            cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh
+                                                            elementum imperdiet. Duis sagittis ipsum. Praesent mauris.
+                                                            Fusce nec tellus sed augue semper </p>
+                                                    </div>
+                                                    <div class="like-comm mt-3"> <a href="javascript:void(0)"
+                                                            class="link me-2">2
+                                                            comment</a> <a href="javascript:void(0)"
+                                                            class="link me-2"><i class="fa fa-heart text-danger"></i>
+                                                            5 Love</a> </div>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="sl-item">
+                                                <div class="sl-left"> <img src="../../static/assets/images/users/4.jpg" alt="user"
+                                                        class="img-circle"> </div>
+                                                <div class="sl-right">
+                                                    <div><a href="#" class="link">Stuart</a> <span class="sl-date">5
+                                                            minutes ago</span>
+                                                        <blockquote class="mt-2">
+                                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                                            sed do eiusmod tempor incididunt
+                                                        </blockquote>
+                                                    </div>
+                                                </div>
+                                            </div> #}
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--second tab-->
+                                <div class="tab-pane" id="profile" role="tabpanel">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-3 col-xs-6 b-r"> <strong>Username</strong>
+                                                <br>
+                                                <p class="text-muted">{{user.username}}</p>
+                                            </div>
+                                            <div class="col-md-3 col-xs-6 b-r"> <strong>Mobile</strong>
+                                                <br>
+                                                <p class="text-muted">{{user.phone}}</p>
+                                            </div>
+                                            <div class="col-md-3 col-xs-6 b-r"> <strong>Email</strong>
+                                                <br>
+                                                <p class="text-muted">{{user.email}}</p>
+                                            </div>
+                                            
+                                        </div>
+                                        <hr>
+                                        <p class="mt-4">{{ user.bio if user.bio else 'No bio available' }}</p>
+                                       
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="settings" role="tabpanel">
+                                    <div class="card-body">
+                                        <form class="form-horizontal form-material mx-2">
+                                            <div class="form-group">
+                                                <label class="col-md-12">Username</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" placeholder={{user.username}}
+                                                        class="form-control form-control-line ps-0" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="example-email" class="col-md-12">Email</label>
+                                                <div class="col-md-12">
+                                                    <input type="email" placeholder={{user.email}}
+                                                        class="form-control form-control-line ps-0" name="example-email"
+                                                        id="example-email" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-12">Phone Number</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" value={{user.phone}}
+                                                        class="form-control form-control-line ps-0" disabled>
+                                                </div>
+                                            </div>
+                    
+                                        
+                                 
+                                          
+                                
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- Table -->
+                <!-- ============================================================== -->
+
+       
+ </div>
+ </div>
+
+
+{%endblock%}

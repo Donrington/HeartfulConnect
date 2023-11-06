@@ -1,0 +1,305 @@
+
+{%extends 'user/userdashboardlayout.html'%}
+{%block header%}
+<div class="page-wrapper  pt-5">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="page-breadcrumb">
+        <div class="row align-items-center">
+            <div class="col-md-6 col-8 align-self-center">
+                <h3 class="page-title mb-0 p-0" style="color:#BE1922"><strong>Story</strong></h3>
+                <div class="d-flex align-items-center">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item" ><a href="{{url_for('user.dashboard')}}" style="color:#BE1922">Dashboard</a></li>
+                            <li class="breadcrumb-item active" aria-current="page" style="color:#BE1922">Story</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+            </div>
+           
+
+{%endblock header%}
+{%block content%}
+
+
+<div class="panel">
+    <div class="panel-body">
+        <form method="POST" id="story-form" action="{{ url_for('user.userstory') }}">
+            <textarea class="form-control border-danger" rows="2" name="story_content" placeholder="What are you thinking?"></textarea>
+            <div class="mar-top clearfix">
+                <button class="btn btn-sm btn-dark pull-right rounded-pill" type="submit"><i class="fa fa-pencil fa-fw"></i> Share</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class="flash-messages">
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+
+
+
+
+
+
+{% for story in stories %}
+<div class="media-block">
+    {%if story.user and story.user.user_img%}
+    <a class="media-left" href="#">
+        <img class="img-circle img-sm rounded-pill" alt="Profile Picture" src="/static/images/profile/{{story.user.user_img}}">
+    </a>
+    {%else%}
+    <a class="media-left" href="#">
+        <img class="img-circle img-sm rounded-pill" alt="Profile Picture" src="/static/images/profile/default.png">
+    </a>
+    {%endif%}
+    <div class="media-body">
+        <div class="mar-btm">
+            <a href="#" class="btn-link text-semibold media-heading box-inline">{{ story.user.username }}</a>
+            <p class="text-muted text-sm"><i class="fa fa-mobile fa-lg"></i> -{{ story.post_time.strftime('%H:%M') }} </p>
+        </div>
+        <div class="sl-item message">
+            <div class="sl-left">
+        <div class="">
+            <p>{{ story.content }}</p>
+        </div>
+       </div>
+       </div>
+        <div class="pad-ver">
+            <div class="btn-group">
+                <form method="POST" class="like-form" action="{{ url_for('user.like_post', story_id=story.post_id) }}">
+                    <meta name="csrf-token" content="{{ csrf_token() }}">
+                    <button class="btn btn-sm btn-default btn-hover-success like-btn text-dark"
+                            data-post-id="{{ story.post_id }}"
+                            data-liked="{{ story.has_liked }}">Like</button>
+                    <button class="btn btn-sm btn-default btn-hover-success unlike-btn text-dark"
+                            style="display: none;"
+                            data-post-id="{{ story.post_id }}"
+                            data-liked="{{ story.has_liked }}">Liked</button>
+                </form>
+            </div>
+        </div>
+        
+        
+        <hr>
+        <!-- Display comments for the story -->
+        <form method="POST" action="{{ url_for('user.post_comment', story_id=story.post_id) }}">
+            <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+            <textarea class="form-control" rows="2" name="comment_content" placeholder="Write a comment"></textarea>
+            <div class="mar-top clearfix">
+                <button class="btn btn-sm btn-primary pull-right rounded-pill comment-submit" type="submit">Post Comment</button>
+            </div>
+        </form>
+    
+        <!-- Display comments for the story -->
+        <div class="sl-item message">
+            <div class="sl-left">
+        <div class="comments">
+            {% for comment in story.response %}
+                <div class="media-block">
+                    <a class="media-left" href="#">
+                        <!-- Display user's profile picture if available -->
+                        {% if comment.user and comment.user.user_img %}
+                            <img class="img-circle img-sm rounded-pill" alt="Profile Picture" src="/static/images/profile/{{ comment.user.user_img }}">
+                        {% else %}
+                            <img class="img-circle img-sm rounded-pill" alt="Profile Picture" src="/static/images/profile/default.png">
+                        {% endif %}
+                    </a>
+                    <div class="media-body">
+                        <div class="mar-btm">
+                            <a href="#" class="btn-link text-semibold media-heading box-inline">{{ comment.user.username }}</a>
+                            <p class="text-muted text-sm"><i class="fa fa-mobile fa-lg"></i> - {{ comment.date_posted.strftime('%H:%M') }}</p>
+                        </div>
+                        <div class="">
+                            <p>{{ comment.response_text }}</p>
+                        </div>
+                    </div>
+                </div>
+               
+                
+            {% endfor %}
+        </div>
+    </div>
+    </div>
+    </div>
+{% endfor %}
+
+
+
+
+
+
+
+
+<div class="media-block pad-all">
+<a class="media-left" href="#"><img class="img-circle img-sm rounded-circle rounded-pill" alt="Profile Picture" src="https://bootdey.com/img/Content/avatar/avatar1.png"></a>
+<div class="media-body">
+<div class="mar-btm">
+<a href="#" class="btn-link text-semibold media-heading box-inline">John Doe</a>
+<p class="text-muted text-sm"><i class="fa fa-mobile fa-lg"></i> - From Mobile - 11 min ago</p>
+</div>
+<p>Today's gathering was very impacting.</p>
+<img class="img-responsive thumbnail img-fluid" height="200" width="400" src="/static/images/t2.jpg" alt="Image" >
+<div class="pad-ver mt-3">
+<span class="tag tag-sm"><i class="fa fa-heart text-danger"></i> 250 Likes</span>
+<div class="btn-group">
+<a class="btn btn-sm btn-default btn-hover-success" href="#"><i class="fa fa-thumbs-up"></i></a>
+<a class="btn btn-sm btn-default btn-hover-danger" href="#"><i class="fa fa-thumbs-down"></i></a>
+</div>
+<a class="btn btn-sm btn-default btn-hover-primary" href="#">Comment</a>
+</div>
+</div>
+</div>
+<hr>
+
+
+
+
+
+
+{%endblock%}
+
+{%block customjs%}
+
+<script src="/static/assets/plugins/jquery/dist/jquery.min.js"></script>
+<script src="/static/script/jquery.js"></script>
+<script src="/static/css/js/custom.js"></script>
+<script type='text/javascript'>
+    
+    // JavaScript to handle like/unlike button clicks
+    $(document).on('click', '.like-btn, .unlike-btn', function (e) {
+    e.preventDefault();
+    var button = $(this);
+    var postId = button.data('post-id');
+    var liked = button.data('liked');
+    var actionUrl = liked ? '/user/post/unlike/' + postId : '/user/post/like/' + postId;
+
+    // Retrieve the CSRF token from a meta tag
+    var csrfToken = $('meta[name=csrf-token]').attr('content');
+
+    $.ajax({
+        type: 'POST',
+        url: actionUrl,
+        headers: {
+            'X-CSRFToken': csrfToken  // Include the CSRF token in the request headers
+        },
+        success: function (data) {
+        console.log(data);  // Add this line to see what's in the 'data' response
+        if (data.status === 'success') {
+            button.toggle();
+            button.siblings().toggle();
+            button.data('liked', !liked);
+        } else {
+            alert('An error occurred while processing your request.');
+        }
+    },
+
+        error: function (xhr, status, error) {
+            console.error('Error processing your request:', status, error);
+            alert('An error occurred while processing your request. Please check the browser console for more details.');
+        }
+    });
+});
+
+
+
+
+// JavaScript to handle story form submission
+$(document).on('submit', '#story-form', function (e) {
+    e.preventDefault(); // Prevent the default form submission
+    var form = $(this);
+    var formData = form.serialize();
+    
+    var shareInfo = {
+        share_type: 'Heartful Connect', 
+        share_message: 'Check out this post!',
+    };
+    
+    formData += '&' + $.param(shareInfo);
+    
+    $.ajax({
+        type: 'POST',
+        url: form.attr('action'),
+        data: formData,
+        dataType: 'json',
+        success: function (data) {
+            if (data.status === 'success') {
+                // Display a success message (you can customize this)
+                alert('Story posted successfully');
+                
+                // Optionally, you can refresh the page to see the new posts
+                location.reload();
+            } else {
+                // Handle other status codes or errors here
+            }
+        }
+    });
+});
+
+
+// JavaScript to handle comment form submissions
+$(document).on('submit', 'form.comment-submit', function (e) {
+    e.preventDefault(); // Prevent the default form submission
+    var form = $(this);
+    var formData = form.serialize();
+    
+  
+    
+    $.ajax({
+        type: 'POST',
+        url: form.attr('action'), // Update with the correct URL
+        data: formData,
+        dataType: 'json',
+        success: function (data) {
+        
+        }
+    });
+});
+
+
+
+
+    // Function to update the badge count based on the actual number of unread messages
+    function updateBadgeCount(unreadMessageCount) {
+        const badgeElement = document.querySelector('.notification .num');
+        badgeElement.textContent = unreadMessageCount;
+
+        // Show/hide the badge based on the count
+        badgeElement.style.display = unreadMessageCount > 0 ? 'inline-block' : 'none';
+    }
+
+    // Function to fetch the message count from the server (polling)
+    function fetchMessageCount() {
+        // Replace this URL with your actual endpoint for fetching the message count
+        fetch('/user/story/get-message-count')
+
+            .then(response => response.json())
+            .then(data => {
+                // Update the message count
+                updateBadgeCount(data.count);
+            })
+            .catch(error => {
+                console.error('Error fetching message count:', error);
+            });
+    }
+
+    // Call the update function when the page loads
+    fetchMessageCount();
+
+    // Poll for updates at regular intervals (e.g., every 1 minute)
+    setInterval(fetchMessageCount, 60000);
+</script>
+
+
+
+{%endblock%}

@@ -1,0 +1,67 @@
+
+{%extends 'admin/layout2.html'%}
+{%block content%}
+<head>
+<style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+
+    .sign{
+        position: relative;
+        padding-top:90px ;
+    }
+  </style>
+
+  
+  <!-- Custom styles for this template -->
+</head>
+<body class="text-center">
+  
+<main class="form-signin sign">
+<form action="" method="POST">
+  <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+    {%set m = get_flashed_messages(with_categories=True)%}
+    {%if m: %}
+    {%for usr,msg in m%}
+        {%if usr == 'error'%}
+            <div class="alert alert-danger"> {{msg}} </div>
+        {%else%}
+            <div class="alert alert-success"> {{msg}} </div>
+        {%endif%}
+    {%endfor%}
+    {%endif%}
+    <img src="{{ url_for('static', filename='icon/mainicon.png')}}" class="img-fluid">
+  <h1 class="h3 mb-3 fw-normal text-white"><strong>Admin sign in</strong></h1>
+
+  <div class="form-floating mb-4">
+    <input type="text" class="form-control text-dark" id="floatingInput" name="username" placeholder="JohnDoe..">
+    <label for="floatingInput">Username</label>
+  </div>
+  <div class="form-floating">
+    <input type="password" class="form-control text-dark" id="floatingPassword" name="pwd" placeholder="Password">
+    <label for="floatingPassword">Password</label>
+  </div>
+
+  <div class="checkbox mb-3 text-white">
+    <label>
+      <input type="checkbox" value="remember-me" > Remember me
+    </label>
+  </div>
+  <button class="w-100 btn btn-lg btn-outline-secondary" type="submit">Sign in</button>
+
+</form>
+</main>
+</body>
+
+{%endblock%}

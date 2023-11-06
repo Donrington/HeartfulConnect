@@ -1,0 +1,167 @@
+   <!-- Bootstrap core CSS -->
+   {%extends 'admin/adminlayout.html'%}
+   {%block content%}
+   
+   <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+   <style>
+    
+     
+
+     .bd-placeholder-img {
+       font-size: 1.125rem;
+       text-anchor: middle;
+       -webkit-user-select: none;
+       -moz-user-select: none;
+       user-select: none;
+     }
+
+     @media (min-width: 768px) {
+       .bd-placeholder-img-lg {
+         font-size: 3.5rem;
+       }
+     }
+
+    
+   </style>
+
+   
+   <!-- Custom styles for this template -->
+  
+ </head>
+ <body>
+
+  <div class="page-wrapper">
+
+  <div class="page-breadcrumb">
+    <div class="row align-items-center justify-content-end ml-5">
+      <div class="col-md-6 col-8 align-self-center text-center">
+        <h1 class="page-title mb-0 p-0" style="color: #BE1922;"><strong>Dashboard</strong></h1>
+        <div class="d-flex align-items-center ">
+          <nav aria-label="breadcrumb crumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#" style="color: #BE1922;" class="crumb">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page" style="color: #BE1922;" class="crumb">Dashboard</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+      <div class="col-md-6 col-4 align-self-end text-end">
+        <h2><strong>Welcome, {{ admin.username }}</strong></h2>
+      </div>
+    </div>
+  </div>
+  
+
+
+
+<div class="container-fluid ">
+ 
+
+   <main>
+    <div class=" col-md-9 ms-sm-auto col-lg-10 px-md-4 justify-content-end">
+      {%set m = get_flashed_messages(with_categories=True)%}
+  {%if m: %}
+  {%for cat,msg in m%}
+      {%if cat == 'error'%}
+          <div class="alert alert-danger"> {{msg}} </div>
+      {%else%}
+          <div class="alert alert-success"> {{msg}} </div>
+      {%endif%}
+  {%endfor%}
+  {%endif%}
+        <div class="row">
+            <div class="col-xl-6 col-md-6">
+                <div class="card the bg-primary text-white mb-4">
+                    <div class="card-body">Users</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-white stretched-link" href=" {{url_for('admin_user')}}">View Details</a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-md-6">
+                <div class="card the bg-warning text-white mb-4">
+                    <div class="card-body">Therapist</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-white stretched-link" href="{{url_for('admin_thera') }}">View Details</a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+</main>
+
+
+   <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+
+      <div class="btn-toolbar mb-2 mb-md-0">
+          <div class="btn-group me-2">
+              <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+              <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+          </div>
+          <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+              <span data-feather="calendar"></span>
+              This week
+          </button>
+      </div>
+  </div>
+  
+
+  <!-- Add this HTML element to display the chart -->
+<canvas class="my-4 w-100" id="userTherapistChart" width="900" height="380"></canvas>
+
+
+      <h2>User and Therapist Data</h2>
+      <div class="table-responsive">
+          <table class="table table-striped table-sm">
+              <thead>
+                  <tr>
+                      <th scope="col">ID Nos</th>
+                      <th scope="col">Username</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">Phone</th>
+                      <th scope="col">Registration Date</th>
+                      <th scope="col">Role</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  {% for user in users %}
+                  <tr>
+                      <td>{{ user.userid }}</td>
+                      <td>{{ user.username }}</td>
+                      <td>{{ user.email }}</td>
+                      <td>{{ user.phone }}</td>
+                      <td>{{ user.registration_date }}</td>
+                      <td>User</td>
+                  </tr>
+                  {% endfor %}
+                  {% for therapist in therapists %}
+                  <tr>
+                      <td>{{ therapist.therapist_id }}</td>
+                      <td>{{ therapist.theraname }}</td>
+                      <td>{{ therapist.theraemail }}</td>
+                      <td>{{ therapist.phone }}</td>
+                      <td>{{ therapist.registration_date2 }}</td>
+                      <td>Therapist</td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+      </div>
+      
+     </div>
+    </main>
+  </div>
+  </div>
+  </div>
+  </div>
+
+<script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
+
+{%endblock%}

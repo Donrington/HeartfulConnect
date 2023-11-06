@@ -1,0 +1,66 @@
+{%extends "user/layout2.html"%}
+
+
+
+{%block content%}
+ <div class="container main">
+    <div class="text-center">
+        <img src="../../static/icon/icon1.png" alt="Heartful Connections Icon" class="mb-4 img-fluid icon">
+        <h2><strong>User Registration</strong></h2>
+            {%if form.username.errors or form.confirm_pwd.errors%}
+            <div class="alert alert-danger">
+                <p>{{form.username.errors}}</p>
+                <p>{{form.confirm_pwd.errors}}</p>
+            </div>
+            {%endif%}
+    </div>
+   
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <div class="form-group mt-3 mb-3">
+            <label for="username"><strong>Username:</strong></label>
+            {{ form.username(class="form-control border-danger", placeholder="Enter username", required="required", autofocus="autofocus") }}
+        </div>
+        <div class="form-group mt-3">
+            <label for="email"><strong>Email:</strong></label>
+            {% if form.usermail.errors%}
+                {% for i in form.usermail.errors%}
+                <span style="color:red">{{i}}</span>
+                {%endfor%}
+            {%endif%}
+            {{ form.usermail(class="form-control border-danger", placeholder="Enter email", required="required") }}
+        </div>
+        <div class="form-group mt-3">
+            <label for="phone"><strong>Phone Number:</strong></label>
+            {{ form.userphone(class="form-control border-danger", placeholder="Enter phone number", required="required") }}
+        </div>
+        <div class="form-group mt-3">
+            <label><strong>Gender:</strong></label><br>
+            {{ form.gender(id="male", value="male", required="required") }}
+        </div>
+        <div class="form-group">
+            <label for="dob"><strong>Date of Birth:</strong></label>
+            {{ form.dob(class="form-control border-danger", required="required") }}
+        </div>
+        <div class="form-group mt-3">
+            <label for="password"><strong>Password:</strong></label>
+            {{ form.pwd(class="form-control border-danger", placeholder="Enter password", required="required") }}
+        </div>
+        <div class="form-group mt-3">
+            <label for="confirm_pwd"><strong>Confirm Password:</strong></label>
+            {{ form.confirm_pwd(class="form-control border-danger", placeholder="Confirm password", required="required") }}
+        </div>
+        {{form.csrf_token}}
+        <button type="submit" class="btn btn-outline-danger rounded-pil form-control rounded-pil mt-3 mb-2" id="sub">Submit Credentials</button>
+        <div class="col-md-12 pt-2 mt-3  text-center">
+           <span class="text-light pb-4">By Registering You Agree To Our </span><span class="text-danger pb-4">Terms & Condition</span>
+        </div>
+        <a href="{{url_for('therapist.thera_registration')}}"class="text-danger text-decoration-none" id="usr">Register As A Therapist</a>
+    </form>
+</div> 
+
+
+
+
+
+{%endblock%}
