@@ -193,14 +193,16 @@
                                                             <div class="pad-ver">
                                                                 <div class="btn-group">
                                                                     <form method="POST" class="like-form" action="{{ url_for('user.like_post', story_id=story.post_id) }}">
-                                                                        <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+                                                                        <meta name="csrf-token" content="{{ csrf_token() }}">
                                                                         <button class="btn btn-sm btn-default btn-hover-success like-btn text-dark"
-                                                                                data-post-id="{{ story.post_id }}"
-                                                                                data-liked="{{ story.has_liked }}">Like</button>
-                                                                        <button class="btn btn-sm btn-default btn-hover-success unlike-btn text-dark"
-                                                                                style="display: none;"
-                                                                                data-post-id="{{ story.post_id }}"
-                                                                                data-liked="{{ story.has_liked }}">Liked</button>
+                                                                        data-post-id="{{ story.post_id }}"
+                                                                        data-liked="{{ 'true' if story.has_liked else 'false' }}">Like</button>
+                                                                
+                                                                <button class="btn btn-sm btn-default btn-hover-success unlike-btn text-dark"
+                                                                        style="display: none;"
+                                                                        data-post-id="{{ story.post_id }}"
+                                                                        data-liked="{{ 'true' if story.has_liked else 'false' }}">Liked</button>
+                                                                
                                                                     </form>
                                                                 </div>
                                                             </div>
@@ -343,5 +345,58 @@
  </div>
  </div>
 
+
+<script src="/static/script/jquery.js"></script>
+<script src="/static/css/js/custom.js"></script>
+<script type='text/javascript'>
+    
+    $(document).on('click', '.like-btn, .unlike-btn', function (e) {
+    e.preventDefault();
+    var button = $(this);
+    var postId = button.data('post-id');
+    var liked = button.data('liked') === true;  // Compare with true
+    var actionUrl = liked ? '/user/post/unlike/' + postId : '/user/post/like/' + postId;
+
+    // Retrieve the CSRF token from a meta tag
+    var csrfToken = $('meta[name=csrf-token]').attr('content');
+
+    $.ajax({
+        type: 'POST',
+        url: actionUrl,
+        headers: {
+            'X-CSRFToken': csrfToken  // Include the CSRF token in the request headers
+        },
+        success: function (data) {
+            console.log(data);  // Add this line to see what's in the 'data' response
+            if (data.status === 'success') {
+                button.toggle();
+                button.siblings().toggle();
+                button.data('liked', !liked);
+                localStorage.setItem('post_' + postId, liked);  // Store as boolean
+            } else {
+                alert('An error occurred while processing your request.');
+            }
+        },
+
+        error: function (xhr, status, error) {
+            console.error('Error processing your request:', status, error);
+            alert('An error occurred while processing your request. Please check the browser console for more details.');
+        }
+    });
+});
+
+$(document).ready(function () {
+    $('.like-btn, .unlike-btn').each(function () {
+        var button = $(this);
+        var postId = button.data('post-id');
+        var likeStatus = localStorage.getItem('post_' + postId);
+
+        if (likeStatus === 'true') {  // Compare with 'true'
+            button.toggle();
+            button.siblings().toggle();
+        }
+    });
+});
+</script>
 
 {%endblock%}

@@ -80,12 +80,14 @@
                 <form method="POST" class="like-form" action="{{ url_for('user.like_post', story_id=story.post_id) }}">
                     <meta name="csrf-token" content="{{ csrf_token() }}">
                     <button class="btn btn-sm btn-default btn-hover-success like-btn text-dark"
-                            data-post-id="{{ story.post_id }}"
-                            data-liked="{{ story.has_liked }}">Like</button>
-                    <button class="btn btn-sm btn-default btn-hover-success unlike-btn text-dark"
-                            style="display: none;"
-                            data-post-id="{{ story.post_id }}"
-                            data-liked="{{ story.has_liked }}">Liked</button>
+                    data-post-id="{{ story.post_id }}"
+                    data-liked="{{ 'true' if story.has_liked else 'false' }}">Like</button>
+            
+            <button class="btn btn-sm btn-default btn-hover-success unlike-btn text-dark"
+                    style="display: none;"
+                    data-post-id="{{ story.post_id }}"
+                    data-liked="{{ 'true' if story.has_liked else 'false' }}">Liked</button>
+            
                 </form>
             </div>
         </div>
@@ -96,7 +98,7 @@
         <form method="POST" action="{{ url_for('user.post_comment', story_id=story.post_id) }}">
             <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
             <textarea class="form-control" rows="2" name="comment_content" placeholder="Write a comment"></textarea>
-            <div class="mar-top clearfix">
+            <div class="mar-top clearfix pb-3">
                 <button class="btn btn-sm btn-primary pull-right rounded-pill comment-submit" type="submit">Post Comment</button>
             </div>
         </form>
@@ -141,7 +143,7 @@
 
 
 
-<div class="media-block pad-all">
+{#<div class="media-block pad-all">
 <a class="media-left" href="#"><img class="img-circle img-sm rounded-circle rounded-pill" alt="Profile Picture" src="https://bootdey.com/img/Content/avatar/avatar1.png"></a>
 <div class="media-body">
 <div class="mar-btm">
@@ -160,7 +162,7 @@
 </div>
 </div>
 </div>
-<hr>
+<hr>#}
 
 
 
@@ -176,12 +178,11 @@
 <script src="/static/css/js/custom.js"></script>
 <script type='text/javascript'>
     
-    // JavaScript to handle like/unlike button clicks
     $(document).on('click', '.like-btn, .unlike-btn', function (e) {
     e.preventDefault();
     var button = $(this);
     var postId = button.data('post-id');
-    var liked = button.data('liked');
+    var liked = button.data('liked') === true;  // Compare with true
     var actionUrl = liked ? '/user/post/unlike/' + postId : '/user/post/like/' + postId;
 
     // Retrieve the CSRF token from a meta tag
@@ -194,15 +195,16 @@
             'X-CSRFToken': csrfToken  // Include the CSRF token in the request headers
         },
         success: function (data) {
-        console.log(data);  // Add this line to see what's in the 'data' response
-        if (data.status === 'success') {
-            button.toggle();
-            button.siblings().toggle();
-            button.data('liked', !liked);
-        } else {
-            alert('An error occurred while processing your request.');
-        }
-    },
+            console.log(data);  // Add this line to see what's in the 'data' response
+            if (data.status === 'success') {
+                button.toggle();
+                button.siblings().toggle();
+                button.data('liked', !liked);
+                localStorage.setItem('post_' + postId, liked);  // Store as boolean
+            } else {
+                alert('An error occurred while processing your request.');
+            }
+        },
 
         error: function (xhr, status, error) {
             console.error('Error processing your request:', status, error);
@@ -211,10 +213,19 @@
     });
 });
 
+$(document).ready(function () {
+    $('.like-btn, .unlike-btn').each(function () {
+        var button = $(this);
+        var postId = button.data('post-id');
+        var likeStatus = localStorage.getItem('post_' + postId);
 
+        if (likeStatus === 'true') {  // Compare with 'true'
+            button.toggle();
+            button.siblings().toggle();
+        }
+    });
+});
 
-
-// JavaScript to handle story form submission
 $(document).on('submit', '#story-form', function (e) {
     e.preventDefault(); // Prevent the default form submission
     var form = $(this);
@@ -237,8 +248,12 @@ $(document).on('submit', '#story-form', function (e) {
                 // Display a success message (you can customize this)
                 alert('Story posted successfully');
                 
-                // Optionally, you can refresh the page to see the new posts
-                location.reload();
+                // Optionally, update the UI without reloading the page
+                // Example: Append the new story to the list
+                $('#stories-list').append('<div>' + data.newStory + '</div>');
+                
+                // Clear the form
+                form.find('textarea[name="story_content"]').val('');
             } else {
                 // Handle other status codes or errors here
             }
@@ -247,13 +262,13 @@ $(document).on('submit', '#story-form', function (e) {
 });
 
 
+
+
 // JavaScript to handle comment form submissions
 $(document).on('submit', 'form.comment-submit', function (e) {
     e.preventDefault(); // Prevent the default form submission
     var form = $(this);
     var formData = form.serialize();
-    
-  
     
     $.ajax({
         type: 'POST',
@@ -261,12 +276,20 @@ $(document).on('submit', 'form.comment-submit', function (e) {
         data: formData,
         dataType: 'json',
         success: function (data) {
-        
+            // Handle success if needed
+            if (data.status === 'success') {
+                // Update the UI without reloading the page
+                // Example: Append the new comment to the comment section
+                form.closest('.comments-section').append('<div>' + data.newComment + '</div>');
+                
+                // Clear the form
+                form.find('textarea[name="comment_content"]').val('');
+            } else {
+                // Handle other status codes or errors here
+            }
         }
     });
 });
-
-
 
 
     // Function to update the badge count based on the actual number of unread messages

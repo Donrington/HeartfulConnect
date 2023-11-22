@@ -22,6 +22,7 @@
 
 
 {%block content%}
+<div class="table-responsive">
 
 <table class="table table-striped align-middle mb-0 bg-white mt-5 col-md-12 ">
     <thead>
@@ -81,8 +82,9 @@
                 <a href="{{ url_for('therapist.accept_consultation', consultation_id=consultation.consultation_id) }}" class="btn btn-info">Accept</a>
             </td>
             <td>
-                <a href="{{ url_for('therapist.view_user_profile', user_id=consultation.user_feed.userid) }}" class="btn btn-info">View Profile</a>
+                <a href="{{ url_for('therapist.view_user_profile', user_id=consultation.user_feed.userid, thera_logged=session.get('theralogged')) }}" class="btn btn-info">View Profile</a>
             </td>
+            
         </tr>
         {% endfor %}
 
@@ -90,6 +92,7 @@
   
     </tbody>
 </table>
+</div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 function submitFeedback(consultationId) {

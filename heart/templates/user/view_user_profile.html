@@ -1,5 +1,5 @@
 
-{%extends 'user/userdashboardlayout.html'%}
+{%extends 'user/theradash.html'%}
 {%block header%}
 <div class="page-wrapper">
     <!-- ============================================================== -->
@@ -12,7 +12,7 @@
                 <div class="d-flex align-items-center">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item" ><a href="{{url_for('user.dashboard')}}" style="color:#BE1922">Dashboard</a></li>
+                            <li class="breadcrumb-item" ><a href="{{url_for('therapist.theradashboard')}}" style="color:#BE1922">Dashboard</a></li>
                             <li class="breadcrumb-item active" aria-current="page" style="color:#BE1922">Consultation</li>
                         </ol>
                     </nav>

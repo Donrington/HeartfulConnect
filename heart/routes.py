@@ -384,6 +384,11 @@ def dashboard():
         other_users = MyUser.query.filter(MyUser.userid != id).all()
         # Fetch the stories for the dashboard
         stories = Post.query.order_by(Post.post_id.desc()).all()
+
+        if 'userlogged' in session:
+            user_id = session['userlogged']
+        for story in stories:
+            story.has_liked = story.has_liked(user_id)
         
         return render_template('user/dashboard_new.html', user=user,  other_users= other_users,stories=stories, pagename="Dashboard | Heartful Connect")
     else:
@@ -478,7 +483,6 @@ def post_comment(story_id):
     return redirect(url_for('user.userstory'))  # Redirect to the story page
 
 
-
 @user_bp.route('/post/like/<int:story_id>', methods=['POST','GET'])
 @login_required
 def like_post(story_id):
@@ -496,12 +500,10 @@ def like_post(story_id):
         db.session.commit()
         flash('You liked the post.', 'success')
     
-    return jsonify({'status': 'success', 'message': 'You liked the post.'})
-
+    return jsonify({'status': 'success', 'message': 'You liked the post', 'liked': True})
 
 @user_bp.route('/post/unlike/<int:story_id>', methods=['POST','GET'])
 @login_required
-
 def unlike_post(story_id):
     # Get the user ID from the session
     user_id = session.get('userlogged')
@@ -513,10 +515,11 @@ def unlike_post(story_id):
         db.session.delete(like)
         db.session.commit()
         flash('You unliked the post.', 'success')
+        return jsonify({'status': 'success', 'message': 'You unliked the post', 'liked': False})
     else:
         flash('You cannot unlike a post you have not liked.', 'warning')
-    
-    return jsonify({'status': 'success', 'message': 'You Unliked the post.'})
+        return jsonify({'status': 'success', 'message': 'You cannot unlike a post you have not liked', 'liked': True})
+
 
 
 
@@ -593,20 +596,30 @@ def submit_contact():
 
 
 
+
+
+
 @user_bp.route('/view_therapist_profile/<int:thera_id>')
 @login_required
 def view_therapist_profile(thera_id):
-    user= None
-    # Fetch therapist data from the database using therapist_id (assuming you have a Therapist model)
+    # Fetch user data from the database using user_id (assuming you have a User model)
     thera = db.session.query(Therapist).get(thera_id)
 
-    if thera:
-        return render_template('user/theraprofile2.html', thera=thera, user=user)
-    else:
-        # Handle the case where the therapist is not found
-        flash('Therapist not found.', category='danger')
-        return redirect(url_for('user.consult'))
+    # Retrieve therapist session information
+    user_id = session.get('userlogged')
+    user = db.session.query(MyUser).get(user_id)
 
+    if thera:
+        if user:
+            # If a therapist is logged in, render a therapist-specific template
+            return render_template('user/view_therapist_profile.html', user=user, thera=thera)
+        else:
+            # If a regular user is logged in, render the regular user template
+            return render_template('user/theraprofile2.html', thera=thera)
+    else:
+        # Handle the case where the user is not found
+        flash('User not found.', category='danger')
+        return redirect(url_for('user.consult'))
 
 
 
@@ -893,17 +906,29 @@ def consults():
     
 
 @therapist_bp.route('/view_user_profile/<int:user_id>')
-@login_req  # Use the login_required decorator to protect this route
+@login_req
 def view_user_profile(user_id):
     # Fetch user data from the database using user_id (assuming you have a User model)
     user = db.session.query(MyUser).get(user_id)
 
+    # Retrieve therapist session information
+    thera_id = session.get('theralogged')
+    thera = db.session.query(Therapist).get(thera_id)
+
     if user:
-        return render_template('user/userprofile.html', user=user)
+        if thera:
+            # If a therapist is logged in, render a therapist-specific template
+            return render_template('user/view_user_profile.html', user=user, thera=thera)
+        else:
+            # If a regular user is logged in, render the regular user template
+            return render_template('user/userprofile.html', user=user)
     else:
         # Handle the case where the user is not found
         flash('User not found.', category='danger')
         return redirect(url_for('therapist.consults'))
+
+
+
 
 
 @therapist_bp.route('/thera_profile/')
